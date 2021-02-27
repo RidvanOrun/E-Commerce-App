@@ -1,0 +1,51 @@
+﻿@model EditProfileDTO
+@{
+    ViewData["Title"] = "EditProfile";
+}
+
+<div class="row">
+    <div class="col-sm-10">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Edit Profile</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Account" asp-action="EditProfile" enctype="multipart/form-data">
+                    <input hidden asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input class="form-control" asp-for="Email" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserName"></label>
+                        <input class="form-control" asp-for="UserName" placeholder="User Name" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName"></label>
+                        <input class="form-control" asp-for="FullName" placeholder="Name" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input class="form-control" asp-for="Password" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose File</label>
+                        <input class="form-control" asp-for="Image" />
+                    </div>
+
+                    <div class="form-group float-right">
+                        <button type="submit" class="btn btn-lg btn-primary">Edit Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

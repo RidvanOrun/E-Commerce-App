@@ -13,4 +13,4 @@ namespace ECommerceApp.InfrastructureLayer.Repository.EntityTypeRepository
         public AppUserRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext) { } // => Database bağlantısı yapıldı.
     }
 }
-}
+

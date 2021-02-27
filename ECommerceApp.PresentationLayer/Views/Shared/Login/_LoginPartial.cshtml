@@ -1,0 +1,30 @@
+﻿@model LoginDTO
+
+
+<div class="card-body">
+    <form method="post" asp-controller="Account" asp-action="LogIn">
+        @*asp-route-returnUrl="@ViewData["ReturnUrl"]"*@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input type="text" class="form-control" asp-for="UserName" placeholder="User Name" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input type="password" class="form-control" asp-for="Password" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Remember Me</label>
+            <input type="checkbox" asp-for="RememberMe" />
+        </div>
+
+        <div class="form-group float-right">
+            <button type="submit" class="btn btn-lg btn-primary">Log In</button>
+        </div>
+    </form>
+</div>
