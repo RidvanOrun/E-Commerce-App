@@ -7,8 +7,6 @@ using ECommerceApp.DomainLayer.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using SixLabors.ImageSharp;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ECommerceApp.ApplicationLayer.Services.Concrete
@@ -98,9 +96,16 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
 
         public async Task<ProfileVM> GetByUserName(string userName)
         {
-            var user = await _unitOfWork.AppUserRepository.GetByUserName(userName);
+            var user = await _unitOfWork.AppUserRepository.GetFilteredFirstOrDefault(
+                selector: x => new ProfileVM {
+                    ImagePath = x.ImagePath,
+                    UserName = x.UserName
+                },
+                expression: y=>y.UserName==userName                
+                );
 
-            return _mapper.Map<ProfileVM>(user);
+
+            return user;
         }
 
         public async Task<int> GetUserIdFromName(string userName)

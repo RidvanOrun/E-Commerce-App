@@ -1,5 +1,6 @@
 ﻿using ECommerceApp.ApplicationLayer.Extensions;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
+using ECommerceApp.ApplicationLayer.Model.VM;
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,16 +26,16 @@ namespace ECommerceApp.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO registerDTO)
+        public async Task<IActionResult> Register(RegisterDTO model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _appUser.Register(registerDTO);
+                var result = await _appUser.Register(model);
                 if (result.Succeeded)
                     return RedirectToAction("Index", "Home");
                 foreach (var item in result.Errors) ModelState.AddModelError(string.Empty, item.Description);
             }
-            return View(registerDTO);
+            return View(model);
         }
         #endregion
 
@@ -50,11 +51,11 @@ namespace ECommerceApp.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDTO dTO)
+        public async Task<IActionResult> Login(LoginDTO model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _appUser.LogIn(dTO);
+                var result = await _appUser.LogIn(model);
                 if (result.Succeeded)
                 {
                     return RedirectToAction(nameof(HomeController.Index), "Home"); // Eğer giriş başarılı olursa HomeController'daki Home Action'a yönlendir.
@@ -86,14 +87,20 @@ namespace ECommerceApp.PresentationLayer.Controllers
                 return View(user);
             }
             else
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProfile(EditProfileDTO editProfileDTO)
+        public async Task<IActionResult> EditProfile(EditProfileDTO model)
         {
-            await _appUser.EditUser(editProfileDTO);
+            await _appUser.EditUser(model);
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        public async Task<IActionResult> Details (ProfileVM model)
+        {            
+            var user = await _appUser.GetByUserName(model.UserName);
+            return View(user);
         }
     }
 }

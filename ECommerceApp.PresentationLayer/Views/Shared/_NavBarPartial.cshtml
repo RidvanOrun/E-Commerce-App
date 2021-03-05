@@ -1,4 +1,5 @@
 ﻿
+@model ProfileVM
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<AppUser> SignInManager
 
@@ -13,25 +14,22 @@
         <div class="mx-auto">
             <form asp-controller="Search" asp-action="Index" method="get" id="searchform">
                 <input class="form-control" type="search" name="userName" placeholder="Search" onkeypress="keypress(event)" aria-label="Search" />
-                @*<button class="btn btn-outline-success" type="submit" onclick="keypress(event)">Search</button>*@
             </form>
         </div>
-        @*<ul class="mx-auto">
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a asp-area="" asp-controller="Profile" asp-action="Details" asp-route-username="@User.Identity.Name">
-                            @User.Identity.Name
-                        </a>
-                    </li>
+        <div>            
+            <button class="btn btn-outline-success"  type="submit" onclick="keypress(event)" asp-area="" asp-controller="Account" asp-action="EditProfile">Search</button>
+        </div>
+        
+      
 
-                }
-            </ul>*@
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
             <div class="navbar-nav ml-2">
                 @if (SignInManager.IsSignedIn(User))
                 {
-
+                <div class="nav-item">                    
+                    <a asp-area="" asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name"> @User.Identity.Name  </a>
+                </div>
+                    
                     <div class="nav-item">
                         <form method="post" asp-controller="Account" asp-action="LogOut">
                             <button type="submit" class="btn btn-primary">Log Out</button>
@@ -40,6 +38,7 @@
                 }
                 else
                 {
+
                     <div class="nav-item">
                         <a class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
                     </div>
@@ -68,7 +67,6 @@
                             </div>
                         </div>
                     </div>
-
                 }
             </div>
         </div>

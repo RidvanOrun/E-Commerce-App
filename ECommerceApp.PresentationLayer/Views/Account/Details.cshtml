@@ -1,0 +1,23 @@
+﻿@inject SignInManager<AppUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@model ProfileVM
+
+
+
+
+<div class="container">
+
+    <h2>Profil Özeti</h2>
+
+    <div class="header">
+        <img src="@Model.ImagePath" class="img-lg" width="100" height="100" />
+        <h5 class="card-title">Kullanıcı Adı: @Model.UserName</h5>
+    </div>
+    <div>
+        <div class="nav-item">
+            <a asp-area="" asp-controller="Account" asp-action="EditProfile" asp-route-username="@Model.UserName"> Edit </a>
+            
+        </div>
+    </div>
+
+</div>

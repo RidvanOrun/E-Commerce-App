@@ -9,26 +9,26 @@
             </div>
             <div class="card-body">
                 <form method="post" asp-controller="Account" asp-action="Register">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div> @* asp-validation-summary ModelState hatalarını göstermede yardımcı olur. *@
+                    <div asp-validation-summary="ModelOnly" class="text-danger"> </div> @* asp-validation-summary ModelState hatalarını göstermede yardımcı olur. *@
                     <div class="form-group">
-                        <label asp-for="FullName"></label>
+                        <label asp-for="FullName"> </label>
                         <input type="text" class="form-control" asp-for="FullName" placeholder="FullName" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <span asp-validation-for="FullName" class="text-danger"> </span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Email"></label>
                         <input type="email" class="form-control" asp-for="Email" placeholder="Email" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <span asp-validation-for="Email" class="text-danger"> </span>
                     </div>
                     <div class="form-group">
                         <label asp-for="UserName"></label>
                         <input type="text" class="form-control" asp-for="UserName" placeholder="User Name" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
+                        <span asp-validation-for="UserName" class="text-danger"> </span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password"></label>
                         <input type="password" class="form-control" asp-for="Password" placeholder="Password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <span asp-validation-for="Password" class="text-danger"> </span>
                     </div>
                     <div class="form-group">
                         <label asp-for="ConfirmPassword"></label>

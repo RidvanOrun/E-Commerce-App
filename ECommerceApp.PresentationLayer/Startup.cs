@@ -85,6 +85,8 @@ namespace ECommerceApp.PresentationLayer
                      pattern: "{profile}/{userName}",
                      defaults: new { controller = "Profile", action = "Details" });
 
+               
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
