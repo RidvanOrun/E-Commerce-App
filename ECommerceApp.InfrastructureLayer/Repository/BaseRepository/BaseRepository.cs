@@ -16,7 +16,7 @@ namespace ECommerceApp.InfrastructureLayer.Repository.BaseRepository
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseEntity
     {
         private readonly ApplicationDbContext _context;
-        protected DbSet<T> _table;
+        protected DbSet<T> _table; 
 
         public BaseRepository(ApplicationDbContext context)
         {
