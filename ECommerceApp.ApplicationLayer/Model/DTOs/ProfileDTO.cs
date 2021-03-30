@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerceApp.ApplicationLayer.Model.VM
+namespace ECommerceApp.ApplicationLayer.Model.DTOs
 {
-    public class ProfileVM
+    public class ProfileDTO
     {
         public string Name { get; set; }
         public string UserName { get; set; }

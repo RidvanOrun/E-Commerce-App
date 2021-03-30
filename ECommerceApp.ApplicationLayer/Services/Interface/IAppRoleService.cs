@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ECommerceApp.ApplicationLayer.Services.Interface
 {
-    class IAppRoleService
+    public class IAppRoleService
     {
+        //IAppRoleService Manegmentda doldurulması gerekiyor.
     }
 }

@@ -27,6 +27,39 @@ namespace ECommerceApp.InfrastructureLayer.UnitOfWork
                 return _appUserRepository; // => eğer dolu gelirse _appUserRepository döndür .
             }
         }
+        
+        private ICategoryRepository _categoryRepository;
+        public ICategoryRepository CategoryRepository
+        {
+            get
+            {
+                if (_categoryRepository == null) _categoryRepository = new CategoryRepository(_db);
+
+                return _categoryRepository; 
+            }
+        }
+        
+        private IRoleRepository _roleRepository;
+        public IRoleRepository RoleRepository
+        {
+            get
+            {
+                if (_roleRepository == null) _roleRepository = new RoleRepository(_db);
+
+                return _roleRepository; 
+            }
+        }
+
+        private IProductRepository _productRepository;
+        public IProductRepository ProductRepository
+        {
+            get
+            {
+                if (_productRepository == null) _productRepository = new ProductRepository(_db);
+
+                return _productRepository;
+            }
+        }
 
         public async Task Commit() => await _db.SaveChangesAsync();
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
-using ECommerceApp.ApplicationLayer.Model.VM;
+
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using ECommerceApp.DomainLayer.Entities.Concrete;
 using ECommerceApp.DomainLayer.UnitOfWork;
@@ -94,10 +94,10 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             return _mapper.Map<EditProfileDTO>(user);
         }
 
-        public async Task<ProfileVM> GetByUserName(string userName)
+        public async Task<ProfileDTO> GetByUserName(string userName)
         {
             var user = await _unitOfWork.AppUserRepository.GetFilteredFirstOrDefault(
-                selector: x => new ProfileVM {
+                selector: x => new ProfileDTO {
                     ImagePath = x.ImagePath,
                     UserName = x.UserName
                 },

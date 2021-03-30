@@ -10,6 +10,12 @@ namespace ECommerceApp.DomainLayer.UnitOfWork
     {
         IAppUserRepository AppUserRepository { get; }
 
+        ICategoryRepository CategoryRepository { get; }
+
+        IProductRepository ProductRepository { get; }
+
+        IRoleRepository RoleRepository { get; }
+
 
         Task Commit(); //Başarılı bir işlemin sonucunda çalıştırılır. İşlemin başlamasından itibaren tüm değişikliklerin veri tabanına uygulanmasını temin eder.
 

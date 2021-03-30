@@ -1,5 +1,4 @@
 ﻿using ECommerceApp.ApplicationLayer.Model.DTOs;
-using ECommerceApp.ApplicationLayer.Model.VM;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
         Task<int> GetUserIdFromName(string userName); // => Kullanıcının isminden Id yakalamak için kullanılır.
 
         Task<EditProfileDTO> GetById(int id);
-        Task<ProfileVM> GetByUserName(string userName);
+        Task<ProfileDTO> GetByUserName(string userName);
     }
 }

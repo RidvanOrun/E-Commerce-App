@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
-using ECommerceApp.ApplicationLayer.Model.VM;
+
 using ECommerceApp.DomainLayer.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace ECommerceApp.ApplicationLayer.Mapper
             /// </summary>
             CreateMap<AppUser, EditProfileDTO>().ReverseMap();
             CreateMap<AppUser, LoginDTO>().ReverseMap();
-            CreateMap<AppUser, ProfileVM>().ReverseMap();
+            CreateMap<AppUser, ProfileDTO>().ReverseMap();
             CreateMap<AppUser, RegisterDTO>().ReverseMap();
         }
     }
