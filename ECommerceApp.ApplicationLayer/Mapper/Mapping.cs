@@ -26,6 +26,12 @@ namespace ECommerceApp.ApplicationLayer.Mapper
             CreateMap<AppUser, LoginDTO>().ReverseMap();
             CreateMap<AppUser, ProfileDTO>().ReverseMap();
             CreateMap<AppUser, RegisterDTO>().ReverseMap();
+
+            CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<CategoryDTO, Category>().ReverseMap();
+
+            CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<ProductDTO, Product>().ReverseMap();
         }
     }
 

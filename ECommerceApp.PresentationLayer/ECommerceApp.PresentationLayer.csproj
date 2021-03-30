@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\" />
     <Folder Include="wwwroot\Content\Uploads\Images\" />
     <Folder Include="wwwroot\Content\Uploads\UsersImages\CruptedImages\" />
     <Folder Include="wwwroot\Content\Uploads\UsersImages\XSmallImages\" />

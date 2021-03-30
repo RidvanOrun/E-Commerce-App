@@ -12,8 +12,11 @@ namespace ECommerceApp.ApplicationLayer.IoC
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+
 
         }
     }

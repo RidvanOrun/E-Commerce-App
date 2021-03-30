@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ECommerceApp.ApplicationLayer.Extensions
 {
-    public static class ClaimsPrincipalExtensions // => buraya açıklama ekle
+    public static class ClaimsPrincipalExtensions // => açıklama ?????
     {
         public static string GetUserEmail(this ClaimsPrincipal principal) => principal.FindFirstValue(ClaimTypes.Email);
 

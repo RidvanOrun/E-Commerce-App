@@ -1,6 +1,5 @@
 ﻿using ECommerceApp.ApplicationLayer.Extensions;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
-using ECommerceApp.ApplicationLayer.Model.VM;
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -97,7 +96,7 @@ namespace ECommerceApp.PresentationLayer.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        public async Task<IActionResult> Details (ProfileVM model)
+        public async Task<IActionResult> Details (ProfileDTO model)
         {            
             var user = await _appUser.GetByUserName(model.UserName);
             return View(user);
