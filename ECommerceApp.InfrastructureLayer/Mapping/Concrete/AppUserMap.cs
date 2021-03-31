@@ -1,5 +1,6 @@
 ﻿using ECommerceApp.DomainLayer.Entities.Concrete;
 using ECommerceApp.InfrastructureLayer.Mapping.Abstract;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,10 @@ namespace ECommerceApp.InfrastructureLayer.Mapping.Concrete
             builder.Property(x => x.FullName).IsRequired(true).HasMaxLength(50); // => FullName boş geçilmesin ve maximum karakteri "50" olarak belirledik.
             builder.Property(x => x.UserName).IsRequired(true).HasMaxLength(40);
             builder.Property(x => x.Email).IsRequired(true);
+
+            builder.HasMany(x => x.AppUserToProducts)
+                .WithOne(x => x.AppUser)
+                .HasForeignKey(x => x.AppUserId).OnDelete(DeleteBehavior.Restrict);
 
 
             base.Configure(builder);

@@ -7,9 +7,9 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
 {
     public class AppUserToProduct:BaseEntity<int>
     {
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        public int ProductId { get; set; }
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
 
         public int AppUserId { get; set; }
         [ForeignKey("AppUserId")]

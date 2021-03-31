@@ -26,8 +26,7 @@ namespace ECommerceApp.InfrastructureLayer.Context
             builder.ApplyConfiguration(new AppRoleMap());
             builder.ApplyConfiguration(new AppUserToProductMap());
             builder.ApplyConfiguration(new CategoryMap());
-            builder.ApplyConfiguration(new ProductMap());
-           
+            builder.ApplyConfiguration(new ProductMap());           
 
             base.OnModelCreating(builder);
         }

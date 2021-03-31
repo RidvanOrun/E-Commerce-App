@@ -9,6 +9,10 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
 {
     public class Product:BaseEntity<int>
     {
+        public Product()
+        {
+            AppUserToProducts = new List<AppUserToProduct>();
+        }
         public string ProductName { get; set; }
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
@@ -25,5 +29,6 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+        public virtual List<AppUserToProduct> AppUserToProducts { get; set; }
     }
 }
