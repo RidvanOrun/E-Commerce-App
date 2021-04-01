@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row mt-2">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">List of Product</div>
+
+            </div>
+            <div class="card-body">
+
+                <div class="form-group">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Id No</td>
+                                <th>Name</th>
+                                <th>Category Id</th>
+                                <th>SubCategory Id</th>
+                                <th>Description</th>
+                                <th>UnitPrice</th>
+                                <th>Ürün Detayı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.CategoryId</td>
+                                    <td>@item.SubCategoryId</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.UnitPrice.ToString("C2")</td>
+
+                                    <td>
+                                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Ürün Detayı</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

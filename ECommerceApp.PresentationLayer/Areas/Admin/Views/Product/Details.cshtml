@@ -1,0 +1,6 @@
+﻿@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@await Component.InvokeAsync("ProductDetail", new { Id = ViewBag.productId })

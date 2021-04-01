@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "GetProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+
+                    <div class="card-header">
+                        <img src="~/images/product/@item.ImagePath" alt="Not Found Image" style="width:150px" class="card-img-top" />
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">@item.ProductName</p>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"> @item.UnitPrice.ToString("C2")</p>
+                        <a asp-area="Admin" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">Button</a>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>

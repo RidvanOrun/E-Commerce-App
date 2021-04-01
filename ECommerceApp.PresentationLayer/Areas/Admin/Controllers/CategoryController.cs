@@ -17,6 +17,12 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
         {
             _categoryService = categoryService;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _categoryService.CategoryList());
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -31,11 +37,45 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             return View(categoryDTO);
         }
 
+        public async Task<IActionResult> Update(int id) => View(await _categoryService.GetById(id));
 
 
-        public IActionResult Index()
+        [HttpPost]
+        public async Task<IActionResult> Update(CategoryDTO model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var category = await _categoryService.GetCategoryName(model);
+                if (category != null)
+                {
+                    await _categoryService.Update(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There is already a category..!");
+                    TempData["Warning"] = "The page  is already exsist..!";
+                    return View(category);
+                }
+            }
+            else
+            {
+                TempData["Error"] = "The category hasn't been edited..!";
+                return View(model);
+            }
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var category = await _categoryService.GetById(id);
+            if (category != null)
+            {
+                await _categoryService.Delete(category);
+                return View("Index");
+            }
+            return View("Index");
+        }
+
+
     }
 }
