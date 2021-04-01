@@ -1,6 +1,7 @@
 ﻿using ECommerceApp.ApplicationLayer.Model.DTOs;
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -24,9 +26,9 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             return View(await _productService.GetAll());
         }
 
-        public IActionResult Create() ///?????
+        public async Task<IActionResult> Create()
         {
-            
+            ViewBag.CategoryId = new SelectList(await _productService.GetCategory(),"Id", "CategoryName");
             return View();
         }
 
@@ -69,6 +71,7 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
         public IActionResult Details(int id)
         {
             ViewBag.productId = id;
+         
             return View();
         }
 

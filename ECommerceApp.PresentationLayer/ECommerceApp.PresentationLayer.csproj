@@ -29,6 +29,7 @@
     <Folder Include="wwwroot\Content\Uploads\UsersImages\CruptedImages\" />
     <Folder Include="wwwroot\Content\Uploads\UsersImages\XSmallImages\" />
     <Folder Include="wwwroot\Content\Uploads\UsersImages\OriginalImages\" />
+    <Folder Include="wwwroot\images\product\" />
     <Folder Include="wwwroot\images\users\" />
   </ItemGroup>
 

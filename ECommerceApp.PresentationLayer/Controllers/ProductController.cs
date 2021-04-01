@@ -20,9 +20,9 @@ namespace ECommerceApp.PresentationLayer.Controllers
             _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> ProductList(Category category)
+        public async Task<IActionResult> ProductList()
         {
-            List<Product> products = await _productService.GetList(category.Id);
+            List<Product> products = await _productService.GetAll();
 
             return View(products);
         }
