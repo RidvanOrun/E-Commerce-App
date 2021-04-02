@@ -16,27 +16,30 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
     {
 
         private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
         public RoleController(UserManager<AppUser> userManager,
-                             RoleManager<IdentityRole> roleManager)
+                             RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
         }
 
+        [Authorize]
         public IActionResult Index() => View(_roleManager.Roles);
 
+        [Authorize]
         public IActionResult Create() => View();
 
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([MinLength(2, ErrorMessage ="Minimum lebght is 2"),
                                                 Required(ErrorMessage ="Must to into role name")] string name)
         {
             if (ModelState.IsValid)
             {
-                IdentityResult ıdentityResult = await _roleManager.CreateAsync(new IdentityRole(name));
+                name = name.Trim().Replace(" ", string.Empty);
+                IdentityResult ıdentityResult = await _roleManager.CreateAsync(new AppRole(name));
                 if (ıdentityResult.Succeeded)
                 {
                     TempData["Success"] = "The role has been created..!";
@@ -49,9 +52,10 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             return View(name);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
-            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            AppRole role = await _roleManager.FindByIdAsync(id);
 
             List<AppUser> hasRole = new List<AppUser>();
             List<AppUser> hasNotRole = new List<AppUser>();
@@ -65,8 +69,8 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             return View(new RoleEditDTO { Role = role, HasRole = hasRole, HasNotRole = hasNotRole });
         }
 
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(RoleEditDTO roleEdit)
         {
             IdentityResult result;
@@ -83,6 +87,14 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
                 result = await _userManager.RemoveFromRoleAsync(appUser, roleEdit.RoleName);
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Remove(string roleName)
+        {
+            var role = await _roleManager.FindByNameAsync(roleName);
+            await _roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
     }

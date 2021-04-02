@@ -39,16 +39,7 @@ namespace ECommerceApp.InfrastructureLayer.UnitOfWork
             }
         }
         
-        private IRoleRepository _roleRepository;
-        public IRoleRepository RoleRepository
-        {
-            get
-            {
-                if (_roleRepository == null) _roleRepository = new RoleRepository(_db);
-
-                return _roleRepository; 
-            }
-        }
+     
 
         private IProductRepository _productRepository;
         public IProductRepository ProductRepository

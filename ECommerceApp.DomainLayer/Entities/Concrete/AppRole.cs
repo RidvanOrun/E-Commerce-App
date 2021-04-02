@@ -7,12 +7,13 @@ using System.Text;
 
 namespace ECommerceApp.DomainLayer.Entities.Concrete
 {
-    public class AppRole:IdentityRole<int>, IBaseEntity
+    public class AppRole : IdentityRole<int>, IBaseEntity
     {
         public AppRole(string name)
         {
             Name = name.ToString();
         }
+
         private DateTime _createDate = DateTime.Now;
         public DateTime CreateDate { get => _createDate; set => _createDate = value; }
         public DateTime? ModifiedDate { get; set; }
@@ -20,6 +21,5 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
 
         private Status _status = Status.Active;
         public Status Status { get => _status; set => _status = value; }
-
     }
 }

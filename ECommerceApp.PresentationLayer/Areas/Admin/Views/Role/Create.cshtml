@@ -1,0 +1,34 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row mt-2">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create Role</h4>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Role" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <input type="text" name="name" class="form-control" />
+
+                    </div>
+                    <div class="form-group float-right">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Role" asp-action="Index" class="btn btn-block btn-dark">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
