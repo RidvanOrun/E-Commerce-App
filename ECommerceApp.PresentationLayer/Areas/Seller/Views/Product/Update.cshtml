@@ -1,17 +1,21 @@
 ﻿@model ProductDTO
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row mt-2">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Create Product</h4>
+                <h4 class="card-title">Edit Product</h4>
             </div>
             <div class="card-body">
-                <form asp-action="Create" enctype="multipart/form-data">
+                <form asp-action="Update" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Image" />
+                    <input type="hidden" asp-for="ImagePath" />
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
@@ -36,7 +40,6 @@
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
-
                     <div class="form-group">
                         <label asp-for="Image" class="control-label"></label>
                         <input asp-for="Image" class="form-control" />
@@ -44,7 +47,7 @@
                     </div>
 
                     <div class="form-group float-right">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Update" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
@@ -54,5 +57,4 @@
         </div>
     </div>
 </div>
-
 

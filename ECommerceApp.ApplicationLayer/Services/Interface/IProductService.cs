@@ -25,5 +25,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
         //????????????? List AppuserToProduct Aynısından appuserdada olması gerekiyor mu aceeebaaaa
         Task<List<Product>> GetList(int id);
 
+        //Task<List<Product>> ProductByCategory(CategoryDTO categoryDTO);
+
     }
 }

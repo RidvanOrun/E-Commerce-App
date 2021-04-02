@@ -27,6 +27,12 @@
                                 <td>@item.Id</td>
                                 <td>@item.UserName</td>
                                 <td>@item.Email</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                </td>
+                                <td>
+                                    <a asp-action="Remove" asp-route-roleName="@item.UserName.ToString();" class="btn btn-danger confirmDeletion">Remove</a>
+                                </td>
                             </tr>
                         }
                     </tbody>

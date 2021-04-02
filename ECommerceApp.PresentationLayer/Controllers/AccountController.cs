@@ -1,6 +1,7 @@
 ﻿using ECommerceApp.ApplicationLayer.Extensions;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
 using ECommerceApp.ApplicationLayer.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

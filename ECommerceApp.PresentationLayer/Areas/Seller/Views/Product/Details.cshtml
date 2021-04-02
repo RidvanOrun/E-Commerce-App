@@ -1,9 +1,8 @@
 ﻿@model ProductDTO
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="row">
     <div class="col-4">
@@ -16,25 +15,6 @@
                 <p class="card-text">@Model.Description</p>
                 <p class="card-text">@Model.UnitPrice.ToString("C2")</p>
             </div>
-            <div class="card-footer">
-
-            </div>
         </div>
     </div>
-
 </div>
-
-@*<div class="container">
-
-    <h2>Profil Özeti</h2>
-
-    <div class="header">
-        <img src="@Model.ImagePath" class="img-lg" width="100" height="100" />
-        <h5 class="card-title">Kullanıcı Adı: @Model.ProductName</h5>
-    </div>
-    <div>
-        <div class="nav-item">
-            <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-username="@Model.ProductName"> Edit </a>
-        </div>
-    </div>
-</div>*@

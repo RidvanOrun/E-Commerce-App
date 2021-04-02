@@ -65,7 +65,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                     fileStream.Close();
                 }
 
-
                 productDTO.ImagePath = imageName;
                 Product product = _mapper.Map<ProductDTO, Product>(productDTO);
                 await _unitOfWork.ProductRepository.Add(product);
@@ -112,6 +111,11 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
 
             return products;
         }
+        //public async Task<List<Product>> ProductByCategory(CategoryDTO categoryDTO)
+        //{
+        //    List<Product> products = await _unitOfWork.CategoryRepository.Get(x => x.CategoryName == categoryDTO.CategoryName);
+        //    return products;
+        //}
 
         public async Task<List<Product>> GetOrderByList()
         {
@@ -206,6 +210,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             }
         }
 
+        
 
     }
 }

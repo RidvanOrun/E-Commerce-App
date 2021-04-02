@@ -1,0 +1,76 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BATAN GEMİ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="mx-auto">
+            <form asp-controller="Search" asp-action="Index" method="get" id="searchform">
+                <input class="form-control" type="search" name="userName" placeholder="Search" onkeypress="keypress(event)" aria-label="Search" />
+            </form>
+        </div>
+
+        <div>
+            <button class="btn btn-outline-success" type="submit" onclick="keypress(event)" asp-area="" asp-controller="Account" asp-action="EditProfile">Search</button>
+        </div>
+
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@User.Identity.Name-HOME </a>
+
+
+
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <div class="navbar-nav ml-2">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="nav-item">
+                        <a asp-area="" asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name"> @User.Identity.Name  </a>
+                    </div>
+
+                    <div class="nav-item">
+                        <form method="post" asp-controller="Account" asp-action="LogOut">
+                            <button type="submit" class="btn btn-primary">Log Out</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="nav-item">
+                        <a class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                    </div>
+
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Log In</h4>
+                                                </div>
+                                                @await Html.PartialAsync("Login/_LoginPartial")
+                                                <div class="card-footer">
+                                                    <a asp-controller="Account" asp-action="Register" class="btn btn-block btn-dark">Register</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</nav>

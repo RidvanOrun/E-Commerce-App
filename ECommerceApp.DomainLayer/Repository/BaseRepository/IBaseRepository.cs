@@ -16,12 +16,14 @@ namespace ECommerceApp.DomainLayer.Repository.BaseRepository
         Task<List<T>> Get(Expression<Func<T, bool>> expression);
         Task<T> GetById(int id);
         Task<T> GetByUserName(string userName);
+      
         Task<T> FirstOrDefault(Expression<Func<T, bool>> expression);
         Task<bool> Any(Expression<Func<T, bool>> expression);
 
         Task Add(T entity);
         void Update(T entity);
         void Delete(T entity);
+
 
         Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector,
                                                          Expression<Func<T, bool>> expression = null,
