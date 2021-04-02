@@ -24,7 +24,8 @@
                                 <th>Category Id</th>
                                 <th>Description</th>
                                 <th>UnitPrice</th>
-                                <th>Ürün Detayı</th>
+                                <th>Details</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,9 @@
 
                                     <td>
                                         <a asp-area="Admin" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Ürün Detayı</a>
+                                    </td>
+                                    <td>
+                                        <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
                                     </td>
 
                                 </tr>

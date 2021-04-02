@@ -16,9 +16,9 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
         public string ProductName { get; set; }
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
-        public string ImagePath { get; set; } /*= "/images/product/default.jpg";*/
+        public string ImagePath { get; set; } = "/images/product/default.jpg";
 
-        [NotMapped] // => NotMapped attribute’ü uygulanarak belli bir alanın tablo’da oluşturulması engellenir.
+        [NotMapped]
         public IFormFile Image { get; set; }
         [NotMapped]
         public IFormFile ImageTwo { get; set; }
