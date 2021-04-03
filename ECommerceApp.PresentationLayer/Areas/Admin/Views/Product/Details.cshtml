@@ -1,51 +1,7 @@
-﻿@model ProductDTO
+﻿
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
-<div class="container">
-
-    <h2>Profil Özeti</h2>
-
-    <div class="header">
-        <img src="@Model.ImagePath" class="img-lg" width="100" height="100" />
-        <h5 class="card-title">Kullanıcı Adı: @Model.ProductName</h5>
-    </div>
-    <div>
-        <div class="nav-item">
-            <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-username="@Model.ProductName"> Edit </a>
-        </div>
-    </div>
-</div>
-
-
-
-
-@*@model ProductDTO
-    @{
-        ViewData["Title"] = "Details";
-        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    }
-
-    <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <img src="~/images/product/@Model.Image" alt="Not Found Image" class="card-img-top" />
-                </div>
-                <div class="card-body">
-                    <p class="card-title">@Model.ProductName</p>
-                    <p class="card-text">@Model.Description</p>
-                    <p class="card-text">@Model.UnitPrice.ToString("C2")</p>
-                </div>
-            </div>
-        </div>
-
-    </div>*@
-
-
-
-
-@*@{
-        ViewData["Title"] = "Details";
-        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    }
-
-    @await Component.InvokeAsync("ProductDetails", new { Id = ViewBag.productId })*@ 
+@await Component.InvokeAsync("ProductDetails", new { Id = @ViewBag.productId })

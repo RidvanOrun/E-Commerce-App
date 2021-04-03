@@ -10,18 +10,16 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">List of Product</div>
-
             </div>
             <div class="card-body">
-
                 <div class="form-group">
-
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <td>Id No</td>
                                 <th>Name</th>
                                 <th>Category Id</th>
+                                <th>User</th>
                                 <th>Description</th>
                                 <th>UnitPrice</th>
                                 <th>Details</th>
@@ -35,9 +33,9 @@
                                     <td>@item.Id</td>
                                     <td>@item.ProductName</td>
                                     <td>@item.CategoryId</td>
+                                    <th>@item.AppUserToProducts</th>
                                     <td>@item.Description</td>
                                     <td>@item.UnitPrice.ToString("C2")</td>
-
                                     <td>
                                         <a asp-area="Seller" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
                                     </td>

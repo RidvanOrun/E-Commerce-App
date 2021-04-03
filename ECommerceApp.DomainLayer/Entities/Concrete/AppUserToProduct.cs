@@ -10,7 +10,6 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
-
         public int AppUserId { get; set; }
         [ForeignKey("AppUserId")]
         public virtual AppUser AppUser { get; set; }

@@ -34,6 +34,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             AppUser user = await _unitOfWork.AppUserRepository.GetById(id);
 
             _unitOfWork.AppUserRepository.Delete(user);
+           
         }
 
         public async Task EditUser(EditProfileDTO editProfileDTO)
@@ -141,5 +142,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             }
             return result;
         }
+
     }
 }

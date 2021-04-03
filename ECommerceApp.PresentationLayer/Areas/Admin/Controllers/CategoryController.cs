@@ -31,8 +31,8 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CategoryDTO categoryDTO)
         {
             if (ModelState.IsValid)
-            {               
-             await _categoryService.Create(categoryDTO);              
+            {
+                await _categoryService.Create(categoryDTO);
             }
             return View(categoryDTO);
         }
@@ -68,12 +68,10 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var category = await _categoryService.GetById(id);
-            if (category != null)
-            {
-                await _categoryService.Delete(category);
-                return View("Index");
-            }
+
+            await _categoryService.Delete(category);
             return View("Index");
+
         }
 
 

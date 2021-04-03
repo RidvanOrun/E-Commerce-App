@@ -14,8 +14,9 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
+                            <th>User Name</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Edit</th>
                             <th>Remove</th>
                         </tr>
@@ -27,11 +28,12 @@
                                 <td>@item.Id</td>
                                 <td>@item.UserName</td>
                                 <td>@item.Email</td>
+                                <td>@item.Status</td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                    <a asp-area="Admin" asp-cobtroller="User" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                                 </td>
                                 <td>
-                                    <a asp-action="Remove" asp-route-roleName="@item.UserName.ToString();" class="btn btn-danger confirmDeletion">Remove</a>
+                                    <a asp-area="Admin" asp-cobtroller="User" asp-action="Delete" class="btn btn-warning">Delete User</a>
                                 </td>
                             </tr>
                         }
