@@ -25,6 +25,10 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
         {
             return View(await _productService.GetAll());
         }
+        public async Task<IActionResult> List()
+        {
+            return View(await _productService.GetAll());
+        }
 
         public async Task<IActionResult> Create()
         {
@@ -70,7 +74,8 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
 
         public IActionResult Details(int id)
         {
-            ViewBag.productId = id;
+            var productsId = _productService.GetById(id);
+            ViewBag.productId = productsId.Id;
          
             return View();
         }

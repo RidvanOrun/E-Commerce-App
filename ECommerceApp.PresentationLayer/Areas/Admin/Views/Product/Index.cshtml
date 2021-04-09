@@ -1,57 +1,27 @@
-﻿@model IEnumerable<Product>
+﻿
+@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="row mt-2">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">List of Product</div>
-
-            </div>
-            <div class="card-body">
-
-                <div class="form-group">
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <td>Id No</td>
-                                <th>Name</th>
-                                <th>Category Id</th>
-                                <th>Description</th>
-                                <th>UnitPrice</th>
-                                <th>Details</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.ProductName</td>
-                                    <td>@item.CategoryId</td>
-                                    <td>@item.Description</td>
-                                    <td>@item.UnitPrice.ToString("C2")</td>
-
-                                    <td>
-                                        <a asp-area="Admin" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                                    </td>
-                                    <td>
-                                        <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
-                                    </td>
-
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">
+                    <img src="/images/product/@item.ImagePath" class="card-img-top" />
+                </div>
+                <div class="card-body">
+                    <p class="card-title">@item.ProductName</p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text">@item.UnitPrice.ToString("C2")</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@item.Id">Add To Cart</a>
                 </div>
             </div>
         </div>
-    </div>
-
+    }
 </div>

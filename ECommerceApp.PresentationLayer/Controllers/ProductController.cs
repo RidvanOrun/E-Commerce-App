@@ -1,5 +1,7 @@
 ﻿
 
+
+
 using ECommerceApp.ApplicationLayer.Model.DTOs;
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using ECommerceApp.DomainLayer.Entities.Concrete;
@@ -13,9 +15,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceApp.PresentationLayer.Controllers
 {
-    //[Authorize(Roles = "member")]
-    [Authorize(Roles = "admin")]
-    [Authorize(Roles = "seller")]
+    
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -46,25 +46,12 @@ namespace ECommerceApp.PresentationLayer.Controllers
             return View(await _productService.GetList(categoryDTO.Id));
         }
 
+        public async Task<IActionResult> GetProductList(Category category)
+        {
+            List<Product> products = await _productService.GetList(category.Id);
 
-        //public async Task<IActionResult> ProductByCategory(CategoryDTO categoryDTO)
-        //{
-        //    Category category = await _categoryService.
-
-
-
-        //Category category = await _categoryRepository.FirstOrDefault(x => x.Slug == categorySlug);
-
-        //    //if (category == null) return RedirectToAction("Index");
-
-        //    //ViewBag.CategoryName = category.Name;
-        //    //ViewBag.CategorySlug = category.Slug;
-        //    //List<Product> products = await _productRepository.Get(x => x.CategoryId == category.Id);
-
-        //    return View(products);
-        //}
-
-
+            return View(products);
+        }
 
     }
 }

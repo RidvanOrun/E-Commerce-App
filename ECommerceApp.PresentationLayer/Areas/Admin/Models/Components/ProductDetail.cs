@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ECommerceApp.PresentationLayer.Areas.Admin.Models.ViewComponents
+namespace ECommerceApp.PresentationLayer.Areas.Admin.Models.Components
 {
     public class ProductDetail : ViewComponent
     {

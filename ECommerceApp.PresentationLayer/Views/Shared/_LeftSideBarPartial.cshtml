@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+
+
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-area="" asp-controller="Product" asp-action="Index"> All Products</a>
+    </li>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="list-group-item">
+            <a asp-area=" " asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name">@User.Identity.Name Profile</a>
+        </li>
+    }
+</ul>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="smallcart bg-success mt-3 p-3 text-white">
+        @await Component.InvokeAsync("SmallCart")
+    </div>
+}
