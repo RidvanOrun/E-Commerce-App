@@ -34,7 +34,7 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             {
                 await _categoryService.Create(categoryDTO);
             }
-            return View(categoryDTO);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Update(int id) => View(await _categoryService.GetById(id));

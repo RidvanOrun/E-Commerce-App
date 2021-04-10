@@ -53,6 +53,7 @@ namespace ECommerceApp.PresentationLayer
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>() // => AddEntityFrameworkStores<ApplicationDbContext>() metodu da; dahil ettiðimiz Identity ara katmanýndaki kullanýcý bilgilerini yönetirken hangi DbContext sýnýfýnýn kullanýlmasý gerektiðini belirtmektedir
                 .AddDefaultTokenProviders();
+            services.AddScoped<AppRole>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

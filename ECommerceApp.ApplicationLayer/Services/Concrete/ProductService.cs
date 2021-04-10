@@ -44,27 +44,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                     await productDTO.Image.CopyToAsync(fileStream);
                     fileStream.Close();
                 }
-                if (productDTO.ImageTwo != null)
-                {
-                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
-                    string newName = productDTO.Description.Trim().Replace(" ", string.Empty).Substring(0, 6);
-                    imageName = newName + "_" + productDTO.ImageTwo.FileName;
-                    string filePath = Path.Combine(uploadDir, imageName);
-                    FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                    await productDTO.ImageTwo.CopyToAsync(fileStream);
-                    fileStream.Close();
-                }
-                if (productDTO.ImageTheree != null)
-                {
-                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
-                    string newName = productDTO.Description.Trim().Replace(" ", string.Empty).Substring(0, 5);
-                    imageName = newName + "_" + productDTO.ImageTheree.FileName;
-                    string filePath = Path.Combine(uploadDir, imageName);
-                    FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                    await productDTO.ImageTheree.CopyToAsync(fileStream);
-                    fileStream.Close();
-                }
-
                 productDTO.ImagePath = imageName;
                 Product product = _mapper.Map<ProductDTO, Product>(productDTO);
                 await _unitOfWork.ProductRepository.Add(product);
@@ -124,6 +103,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                 {
                     ProductName = x.ProductName,
                     Description = x.Description,
+                    DescText = x.DescText,
                     Image = x.Image,
                     ImagePath = x.ImagePath,
                     UnitPrice = x.UnitPrice
@@ -162,44 +142,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                         string filePath = Path.Combine(uploadDir, imageName);
                         FileStream fileStream = new FileStream(filePath, FileMode.Create);
                         await productDTO.Image.CopyToAsync(fileStream);
-                        fileStream.Close();
-                        products.ImagePath = imageName;
-                    }
-                    if (productDTO.ImageTwo != null)
-                    {
-                        string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
-                        if (!string.Equals(products.ImageTwo, "noimage.png"))
-                        {
-                            string oldPath = Path.Combine(uploadDir, products.ImagePath);
-                            if (File.Exists(oldPath))
-                            {
-                                File.Delete(oldPath);
-                            }
-                        }
-
-                        string imageName = productDTO.ProductName + "_" + productDTO.ImageTwo.FileName;
-                        string filePath = Path.Combine(uploadDir, imageName);
-                        FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                        await productDTO.ImageTwo.CopyToAsync(fileStream);
-                        fileStream.Close();
-                        products.ImagePath = imageName;
-                    }
-                    if (productDTO.ImageTheree != null)
-                    {
-                        string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
-                        if (!string.Equals(products.ImageTheree, "noimage.png"))
-                        {
-                            string oldPath = Path.Combine(uploadDir, products.ImagePath);
-                            if (File.Exists(oldPath))
-                            {
-                                File.Delete(oldPath);
-                            }
-                        }
-
-                        string imageName = productDTO.ProductName + "_" + productDTO.ImageTheree.FileName;
-                        string filePath = Path.Combine(uploadDir, imageName);
-                        FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                        await productDTO.ImageTheree.CopyToAsync(fileStream);
                         fileStream.Close();
                         products.ImagePath = imageName;
                     }

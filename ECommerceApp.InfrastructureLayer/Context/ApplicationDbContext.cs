@@ -13,7 +13,10 @@ namespace ECommerceApp.InfrastructureLayer.Context
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { } // Asp.Net.Core Db bağlantısı için oluşturulmuştur.
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<AppUserToProduct> AppUserToProducts { get; set; }       
+        public DbSet<AppUserToProduct> AppUserToProducts { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
+        
+
 
 
 

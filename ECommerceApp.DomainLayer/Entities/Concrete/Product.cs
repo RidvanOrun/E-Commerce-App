@@ -15,15 +15,12 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
         }
         public string ProductName { get; set; }
         public string Description { get; set; }
+        public string DescText { get; set; }
         public decimal UnitPrice { get; set; }
         public string ImagePath { get; set; } = "/images/product/default.jpg";
 
         [NotMapped]
         public IFormFile Image { get; set; }
-        [NotMapped]
-        public IFormFile ImageTwo { get; set; }
-        [NotMapped]
-        public IFormFile ImageTheree { get; set; }
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }

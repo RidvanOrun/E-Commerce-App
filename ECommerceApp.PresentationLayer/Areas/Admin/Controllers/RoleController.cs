@@ -14,7 +14,6 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
     [Area("Admin")]
     public class RoleController : Controller
     {
-
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
 

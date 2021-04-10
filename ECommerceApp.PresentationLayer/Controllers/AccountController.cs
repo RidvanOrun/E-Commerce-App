@@ -42,10 +42,25 @@ namespace ECommerceApp.PresentationLayer.Controllers
         #region LogIn
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.IsInRole("admin"))
+            {
+                return RedirectToAction("Index", "Home","Admin");//"actionName, controllerName"
+            }
+
+            else if (User.IsInRole("seller"))
+            {
+                return RedirectToAction("Index", "Home", "Seller");
+            }
+            else if (User.IsInRole("member"))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+            
+
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction(nameof(HomeController.Index), "Home");
+            //}
 
             return View();
         }

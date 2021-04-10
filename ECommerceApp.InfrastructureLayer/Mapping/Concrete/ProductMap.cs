@@ -15,7 +15,8 @@ namespace ECommerceApp.InfrastructureLayer.Mapping.Concrete
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ProductName).IsRequired(true);
             builder.Property(x => x.UnitPrice).IsRequired(true);
-            builder.Property(x => x.Description).IsRequired(true);
+            builder.Property(x => x.Description).HasMaxLength(25).IsRequired(true);
+            builder.Property(x => x.DescText).IsRequired(true);
 
 
             builder.HasMany(x => x.AppUserToProducts)
