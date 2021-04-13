@@ -2,9 +2,12 @@
 
 
 
+using ECommerceApp.ApplicationLayer.Grids;
 using ECommerceApp.ApplicationLayer.Model.DTOs;
 using ECommerceApp.ApplicationLayer.Services.Interface;
 using ECommerceApp.DomainLayer.Entities.Concrete;
+using ECommerceApp.PresentationLayer.Models.VMs;
+using ECommerceApp.PresentationLayer.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +23,7 @@ namespace ECommerceApp.PresentationLayer.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+   
         public ProductController(IProductService productService,
                                 ICategoryService categoryService)
         {
@@ -27,9 +31,15 @@ namespace ECommerceApp.PresentationLayer.Controllers
             _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _productService.GetAll());
+            var model = await _productService.GetAll();
+            if (!string.IsNullOrEmpty(search))
+            {
+                model = model.Where(x => x.ProductName.Contains(search) || x.Description.Contains(search)).ToList();
+            }
+
+            return View(model);
         }     
 
         public IActionResult Details(int id)
@@ -52,6 +62,30 @@ namespace ECommerceApp.PresentationLayer.Controllers
 
             return View(products);
         }
+
+        //public async Task<IActionResult> Search(SProductGridDTO model)
+        //{
+        //    var builder = new ProductGridBuilder(HttpContext.Session, values, defaultSortFilter: nameof(Product.ProductName));
+
+        //    var options = new ProductQueryOptions
+        //    {
+        //        Includes = "AppUserToProducts.AppUser, Category",
+        //        OrderByDirection = builder.CurrentRotue.SortDirection,
+        //    };
+
+        //    options.SortFilter(builder);
+
+        //    var vm = new ProductFilterViewModel
+        //    {
+        //        Products = _productService.; data.Books.List(options),
+        //        AppUsers = data.Authors.List(new QueryOptions<AppUser> { OrderBy = a => a.FirstName }),
+        //        Categories = _productService.GetCategory();
+        //        CurrentRoute = builder.CurrentRotue,
+        //        TotalPage = builder.GetTotalPages(data.Books.Count)
+        //    };
+
+        //    return View(vm);
+        //}
 
     }
 }

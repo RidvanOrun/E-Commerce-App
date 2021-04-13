@@ -14,6 +14,8 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
             Name = name.ToString();
         }
 
+        //public virtual List<AppUser> AppUsers { get; set; }
+
         private DateTime _createDate = DateTime.Now;
         public DateTime CreateDate { get => _createDate; set => _createDate = value; }
         public DateTime? ModifiedDate { get; set; }
@@ -21,5 +23,7 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
 
         private Status _status = Status.Active;
         public Status Status { get => _status; set => _status = value; }
+
+
     }
 }

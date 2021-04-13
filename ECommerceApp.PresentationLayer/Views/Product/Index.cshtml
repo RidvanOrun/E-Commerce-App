@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -17,11 +19,12 @@
                     <p class="card-title">@item.ProductName</p>
                     <p class="card-text">@item.Description</p>
                     <p class="card-text">@item.UnitPrice.ToString("C2")</p>
+                    @*<p class="card-text">@item.Category.CategoryName</p>*@
                 </div>
                 <div class="card-footer">
                     <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@item.Id">Add To Cart</a>
                 </div>
             </div>
         </div>
-    }
+        }
 </div>

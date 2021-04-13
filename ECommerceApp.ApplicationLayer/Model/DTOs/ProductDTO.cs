@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ECommerceApp.DomainLayer.Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ECommerceApp.ApplicationLayer.Model.DTOs
         public string ImagePath { get; set; } = "/images/product/default.jpg";
         public IFormFile Image { get; set; }
         public int CategoryId { get; set; }
+        //public IEnumerable<AppUser> Users { get; set; } ///// userları çekmek için işe yarayacak mı
 
     }
 }

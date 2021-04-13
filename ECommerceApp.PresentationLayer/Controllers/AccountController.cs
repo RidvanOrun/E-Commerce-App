@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace ECommerceApp.PresentationLayer.Controllers
 {
+    //[Authorize(Roles = "seller")]
+    //[Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IAppUserService _appUser;
@@ -42,26 +44,6 @@ namespace ECommerceApp.PresentationLayer.Controllers
         #region LogIn
         public IActionResult Login()
         {
-            if (User.IsInRole("admin"))
-            {
-                return RedirectToAction("Index", "Home","Admin");//"actionName, controllerName"
-            }
-
-            else if (User.IsInRole("seller"))
-            {
-                return RedirectToAction("Index", "Home", "Seller");
-            }
-            else if (User.IsInRole("member"))
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-            
-
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    return RedirectToAction(nameof(HomeController.Index), "Home");
-            //}
-
             return View();
         }
 
@@ -71,9 +53,10 @@ namespace ECommerceApp.PresentationLayer.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _appUser.LogIn(model);
+               
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home"); // Eğer giriş başarılı olursa HomeController'daki Home Action'a yönlendir.
+                    return RedirectToAction(nameof(HomeController.Index), "Home"); // Eğer giriş başarılı olursa HomeController'daki Home Index'a yönlendir.
                 }
                 ModelState.AddModelError(String.Empty, "Geçersiz giriş denemesi..!");
             }

@@ -102,7 +102,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                {
                    CategoryName = categoryDTO.CategoryName
                },
-               expression: x => x.Id == categoryDTO.Id
+               expression: x => Convert.ToInt32(x.Id) == categoryDTO.Id
                );
             return category;
         }

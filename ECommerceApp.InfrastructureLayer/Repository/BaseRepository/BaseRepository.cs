@@ -42,7 +42,7 @@ namespace ECommerceApp.InfrastructureLayer.Repository.BaseRepository
 
         public void Update(T entity)
         {
-            entity.ModifiedDate = DateTime.Now;
+            //entity.ModifiedDate = DateTime.Now;
             _context.Entry<T>(entity).State = EntityState.Modified; // => Entry .NetCore ile gelen hazır bir methoddur. 
         }
 

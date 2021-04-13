@@ -53,8 +53,8 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id) ////?????
         {
+            ViewBag.CategoryId = new SelectList(await _productService.GetCategory(), "Id", "CategoryName");
             var product = await _productService.GetById(id);
-
             return View(product);
         }
 

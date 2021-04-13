@@ -5,7 +5,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CHEAPEST</a>
+        <a class="navbar-brand" asp-area="Seller" asp-controller="Home" asp-action="Index">CHEAPEST</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,18 +20,19 @@
             <button class="btn btn-outline-success" type="submit" onclick="keypress(event)" asp-area="" asp-controller="Account" asp-action="EditProfile">Search</button>
         </div>
 
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@User.Identity.Name-HOME </a>
+        <a class="navbar-brand">&nbsp; @User.Identity.Name - HOME </a>
 
 
 
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
             <div class="navbar-nav ml-2">
                 @if (SignInManager.IsSignedIn(User))
-                {
+                {                    
                     <div class="nav-item">
-                        <a asp-area="" asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name"> @User.Identity.Name  </a>
+                        <form asp-area="Seller" asp-controller="Home" asp-action="Index" asp-route-username="@User.Identity.Name">
+                            <button type="submit" class="btn btn-primary">@User.Identity.Name</button>
+                        </form>
                     </div>
-
                     <div class="nav-item">
                         <form method="post" asp-controller="Account" asp-action="LogOut">
                             <button type="submit" class="btn btn-primary">Log Out</button>

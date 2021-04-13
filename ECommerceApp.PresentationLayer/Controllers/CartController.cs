@@ -42,21 +42,23 @@ namespace ECommerceApp.PresentationLayer.Controllers
 
             if (cartItem == null)
             {
-                cart.Add(new CartItem(product)); // sepete eklenmek istenilen ürün yok ise yani ürün sepete ilk kez eklenecekse
+                cart.Add(new CartItem(product));
+                 // sepete eklenmek istenilen ürün yok ise yani ürün sepete ilk kez eklenecekse
             }
             else
             {
                 cartItem.Quantity += 1;//sepette var ise increase ediyoruz
+                
             }
 
             HttpContext.Session.SetJson("Cart", cart);
 
             if (HttpContext.Request.Headers["X-Request-With"] != "XMLHttpRequest")
             {
-                return RedirectToAction("Index","Product");//"actionName, controllerName"
+                return RedirectToAction("Index", "Product");//"actionName, controllerName"
             }
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index"/*, "Product"*/);
         }
 
         public IActionResult Decrease(int id)

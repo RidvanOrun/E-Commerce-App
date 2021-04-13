@@ -122,6 +122,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
         {
             var user = await _signInManager.PasswordSignInAsync(loginDTO.UserName, loginDTO.Password, loginDTO.RememberMe, false);
 
+       
             return user;
         }
 

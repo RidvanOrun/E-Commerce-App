@@ -22,6 +22,10 @@ namespace ECommerceApp.InfrastructureLayer.Mapping.Concrete
                 .WithOne(x => x.AppUser)
                 .HasForeignKey(x => x.AppUserId).OnDelete(DeleteBehavior.Restrict);
 
+            //builder.HasOne(x => x.AppRole)
+            //     .WithMany(x => x.AppUsers)
+            //     .HasForeignKey(x => x.RoleId).OnDelete(DeleteBehavior.Restrict);
+
 
             base.Configure(builder);
         }

@@ -63,6 +63,7 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             {
                 var list = await _userManager.IsInRoleAsync(user, role.Name) ? hasRole : hasNotRole;
                 list.Add(user);
+
             }
 
             return View(new RoleEditDTO { Role = role, HasRole = hasRole, HasNotRole = hasNotRole });
@@ -70,6 +71,7 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
 
         [Authorize]
         [HttpPost]
+       
         public async Task<IActionResult> Edit(RoleEditDTO roleEdit)
         {
             IdentityResult result;

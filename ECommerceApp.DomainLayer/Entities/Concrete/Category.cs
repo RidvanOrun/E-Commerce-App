@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ECommerceApp.DomainLayer.Entities.Concrete
 {
-    public class Category:BaseEntity<int>
+    public class Category:BaseEntity<int> // filtreleme için string  tutuldu
     {
        
         public Category() 

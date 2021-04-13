@@ -26,6 +26,11 @@ namespace ECommerceApp.PresentationLayer.Areas.Seller.Controllers
             return View(await _productService.GetAll());
         }
 
+        public async Task<IActionResult> List()
+        {
+            return View(await _productService.GetAll());
+        }
+
         public async Task<IActionResult> Create()
         {
             ViewBag.CategoryId = new SelectList(await _productService.GetCategory(), "Id", "CategoryName");

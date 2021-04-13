@@ -18,6 +18,8 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
 
         Task<List<Product>> GetAll();
 
+        Task<List<Product>> GetProductsFromSeller();
+
         Task<List<Product>> GetOrderByList();
 
         Task<List<Category>> GetCategory(); 

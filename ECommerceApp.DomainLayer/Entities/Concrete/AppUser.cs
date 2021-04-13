@@ -3,6 +3,8 @@ using ECommerceApp.DomainLayer.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ECommerceApp.DomainLayer.Entities.Concrete
@@ -15,6 +17,11 @@ namespace ECommerceApp.DomainLayer.Entities.Concrete
         {
             AppUserToProducts = new List<AppUserToProduct>();
         }
+        [Display(Name = "AppRole")]
+        //public int RoleId { get; set; }
+        //[ForeignKey("RoleId")]
+        //public virtual AppRole AppRole { get; set; }
+
         public string Adress { get; set; }
 
         private DateTime _createDate = DateTime.Now;

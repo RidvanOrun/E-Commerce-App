@@ -1,0 +1,26 @@
+﻿@model ECommerceApp.DomainLayer.Entities.Concrete.AppUser
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h2>@Model.UserName Profil Özeti</h2>
+
+    <div class="header">
+        <img src="@Model.ImagePath" class="img-lg" width="100" height="100" />
+        <h5 class="card-title">Kullanıcı Adı: @Model.UserName</h5>
+        <h5 class="card-title">Kullanıcı Adı: @Model.FullName</h5>
+        <h5 class="card-title">Kullanıcı Adı: @Model.Email</h5>
+
+
+    </div>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -112,7 +112,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                 );
             return productList;
         }
-        
+
         public async Task<List<Category>> GetCategory()
         {
             var categoryList = await _unitOfWork.CategoryRepository.Get(x => x.Status != Status.Passive);
@@ -122,37 +122,50 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
         public async Task Update(ProductDTO productDTO)
         {
             var products = await _unitOfWork.ProductRepository.FirstOrDefault(x => x.Id == productDTO.Id);
-            if (products!= null)
+            //if (products!= null)
+            //{
+            if (productDTO != null)
             {
-                if (productDTO!=null)
+                if (productDTO.Image != null)
                 {
-                    if (productDTO.Image != null)
+                    string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
+                    if (!string.Equals(products.Image, "noimage.png"))
                     {
-                        string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/product");
-                        if (!string.Equals(products.Image, "noimage.png"))
+                        string oldPath = Path.Combine(uploadDir, products.ImagePath);
+                        if (File.Exists(oldPath))
                         {
-                            string oldPath = Path.Combine(uploadDir, products.ImagePath);
-                            if (File.Exists(oldPath))
-                            {
-                                File.Delete(oldPath);
-                            }
+                            File.Delete(oldPath);
                         }
-
-                        string imageName = productDTO.ProductName + "_" + productDTO.Image.FileName;
-                        string filePath = Path.Combine(uploadDir, imageName);
-                        FileStream fileStream = new FileStream(filePath, FileMode.Create);
-                        await productDTO.Image.CopyToAsync(fileStream);
-                        fileStream.Close();
-                        products.ImagePath = imageName;
                     }
-                    _unitOfWork.ProductRepository.Update(products);
-                    await _unitOfWork.Commit();
 
+                    string imageName = productDTO.ProductName + "_" + productDTO.Image.FileName;
+                    string filePath = Path.Combine(uploadDir, imageName);
+                    FileStream fileStream = new FileStream(filePath, FileMode.Create);
+                    await productDTO.Image.CopyToAsync(fileStream);
+                    fileStream.Close();
+                    products.ImagePath = imageName;
                 }
+                if (productDTO.Description != null)
+                {
+                    products.Description = productDTO.Description;
+                }
+               
+                _unitOfWork.ProductRepository.Update(products);
+                await _unitOfWork.Commit();
+
             }
+            //}
         }
 
-        
+        public Task<List<Product>> GetProductsFromSeller()
+        {
+            throw new NotImplementedException();
+        }
 
+        //public async Task<List<Product>> GetProductsFromSeller(int product)
+        //{
+        //    var productListFromSeller = await _unitOfWork.ProductRepository.Get(x => x.AppUserToProducts.AsEnumerable<Pro);
+        //    return productListFromSeller;
+        //}
     }
 }

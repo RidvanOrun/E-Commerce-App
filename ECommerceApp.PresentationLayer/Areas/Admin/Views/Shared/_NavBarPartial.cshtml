@@ -6,19 +6,18 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
         <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">CHEAPEST</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="mx-auto">
-            <form asp-controller="Search" asp-action="Index" method="get" id="searchform">
-                <input class="form-control" type="search" name="userName" placeholder="Search" onkeypress="keypress(event)" aria-label="Search" />
-            </form>
-        </div>
+        @using (Html.BeginForm())
+        {
+            <div>
+                <div style="width:60%; float:left">
+                    @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search" })
+                </div>
+                <div>
+                    <button class="btn btn-outline-success" type="submit" style="float:right">Search</button>
+                </div>
+            </div>
+        }
 
-        <div>
-            <button class="btn btn-outline-success" type="submit" onclick="keypress(event)" asp-area="" asp-controller="Account" asp-action="EditProfile">Search</button>
-        </div>
         <a class="navbar-brand">&nbsp; ADMİN-@User.Identity.Name </a>
 
 
@@ -26,15 +25,15 @@
             <div class="navbar-nav ml-2">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    
+
                     <div class="nav-item">
-                        <form asp-area="" asp-controller="Admin" asp-action="Home" asp-route-username="@User.Identity.Name">
+                        <form asp-area="Admin" asp-controller="Home" asp-action="Index" asp-route-username="@User.Identity.Name">
                             <button type="submit" class="btn btn-primary">@User.Identity.Name</button>
                         </form>
                     </div>
                     <pre></pre>
                     <div class="nav-item">
-                        <form method="post" asp-controller="Account" asp-action="LogOut">
+                        <form method="post" asp-are="" asp-controller="Account" asp-action="LogOut">
                             <button type="submit" class="btn btn-primary">Log Out</button>
                         </form>
                     </div>
@@ -48,7 +47,7 @@
                     <div class="nav-item">
                         <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
                     </div>
-                    <p>&nbsp;</p>
+                    @*<p>&nbsp;</p>
                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -68,8 +67,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
+                    @*</div>*@
                 }
             </div>
         </div>
