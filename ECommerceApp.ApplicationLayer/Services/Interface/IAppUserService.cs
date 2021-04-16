@@ -19,6 +19,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
         Task<int> GetUserIdFromName(string userName); // => Kullanıcının isminden Id yakalamak için kullanılır.
 
         Task<EditProfileDTO> GetById(int id);
+        Task<LoginDTO> GetLoginById(int id);
         Task<ProfileDTO> GetByUserName(string userName);
     }
 }

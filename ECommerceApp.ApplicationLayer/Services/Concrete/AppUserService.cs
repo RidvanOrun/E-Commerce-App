@@ -94,6 +94,12 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
 
             return _mapper.Map<EditProfileDTO>(user);
         }
+        public async Task<LoginDTO> GetLoginById(int id)
+        {
+            var user = await _unitOfWork.AppUserRepository.GetById(id);
+
+            return _mapper.Map<LoginDTO>(user);
+        }
 
         public async Task<ProfileDTO> GetByUserName(string userName)
         {

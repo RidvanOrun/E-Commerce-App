@@ -52,6 +52,10 @@ namespace ECommerceApp.PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = await _appUser.GetUserIdFromName(model.UserName);
+                var user = await _appUser.GetLoginById(userId);
+                
+                
                 var result = await _appUser.LogIn(model);
                
                 if (result.Succeeded)
