@@ -17,38 +17,69 @@
                 </div>
             </div>
         }
-      
-       
-
-
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="navbar-brand">&nbsp; ADMİN-@User.Identity.Name </a>
+        }
+        @if (User.IsInRole("Seller"))
+        {
+            <a class="navbar-brand">&nbsp; @User.Identity.Name-Home </a>
+        }
 
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
             <div class="navbar-nav ml-2">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="nav-item">
-                        <form>
-                            <button type="submit" asp-controller="Home" asp-action="Index" class="btn btn-primary">@User.Identity.Name </button>
-                        </form>
-                    </div>
+                    @if (User.IsInRole("User"))
+                    {
+                        <div class="nav-item">
+                            <form>
+                                <button type="submit" asp-controller="Home" asp-action="Index" class="btn btn-primary">@User.Identity.Name </button>
+                            </form>
+                        </div>
 
-                    <div class="nav-item">
-                        <form method="post" asp-controller="Account" asp-action="LogOut">
-                            <button type="submit" class="btn btn-primary">Log Out</button>
-                        </form>
-                    </div>
+                        <div class="nav-item">
+                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit" class="btn btn-primary">Log Out</button>
+                            </form>
+                        </div>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="nav-item">
+                            <form asp-area="Admin" asp-controller="Home" asp-action="Index" asp-route-username="@User.Identity.Name">
+                                <button type="submit" class="btn btn-primary">@User.Identity.Name</button>
+                            </form>
+                        </div>
+                        <pre></pre>
+                        <div class="nav-item">
+                            <form method="post" asp-are="" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit" class="btn btn-primary">Log Out</button>
+                            </form>
+                        </div>
+                    }
+                    @if (User.IsInRole("Seller"))
+                    {
+                        <div class="nav-item">
+                            <form asp-area="Seller" asp-controller="Home" asp-action="Index" asp-route-username="@User.Identity.Name">
+                                <button type="submit" class="btn btn-primary">@User.Identity.Name</button>
+                            </form>
+                        </div>
+                        <div class="nav-item">
+                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit" class="btn btn-primary">Log Out</button>
+                            </form>
+                        </div>
+                    }
                 }
                 else
                 {
-
                     <div class="nav-item">
                         <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
                     </div>
                     <div class="nav-item">
                         <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
                     </div>
-
-
                 }
             </div>
         </div>

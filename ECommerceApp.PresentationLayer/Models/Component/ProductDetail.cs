@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ECommerceApp.PresentationLayer.Areas.Seller.Models.ViewComponents
+namespace ECommerceApp.PresentationLayer.Models.Component
 {
-    public class ProductDetail : ViewComponent
+    public class ProductDetail:ViewComponent
     {
         private readonly IProductService _productService;
         public ProductDetail(IProductService productService)

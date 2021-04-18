@@ -74,12 +74,12 @@ namespace ECommerceApp.PresentationLayer.Areas.Seller.Controllers
             return View(productDTO);
         }
 
-        public IActionResult Details(int id)
-        {
-            ViewBag.productId = id;
+        //public IActionResult Details(int id)
+        //{
+        //    ViewBag.productId = id;
 
-            return View();
-        }
+        //    return View();
+        //}
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductDTO
 
 <div class="row">
     <div class="col-4">
@@ -9,8 +9,15 @@
             <div class="card-body">
                 <p class="card-title">@Model.ProductName</p>
                 <p class="card-text">@Model.Description</p>
+                <p class="card-text">@Model.DescText</p>
                 <p class="card-text">@Model.UnitPrice.ToString("C2")</p>
             </div>
+            @if (User.IsInRole("User"))
+            {
+                <div class="card-footer">
+                    <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@Model.Id">Add To Cart</a>
+                </div>
+            }
         </div>
     </div>
 </div>

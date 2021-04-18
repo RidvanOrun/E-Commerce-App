@@ -72,13 +72,13 @@ namespace ECommerceApp.PresentationLayer.Areas.Admin.Controllers
             return View(productDTO);
         }
 
-        public IActionResult Details(int id)
-        {
-            var productsId = _productService.GetById(id);
-            ViewBag.productId = productsId.Id;
+        //public IActionResult Details(int id)
+        //{
+        //    var productsId = _productService.GetById(id);
+        //    ViewBag.productId = productsId.Id;
          
-            return View();
-        }
+        //    return View();
+        //}
 
     }
 }

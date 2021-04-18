@@ -8,6 +8,54 @@
         <h4 class="card-title">Sign In</h4>
     </div>
     <div class="card-body">
+        @if (User.IsInRole("Admin"))
+        {
+            <form asp-are="Admin" asp-action="LogIn">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AppRole" class="control-label"></label>
+                    <input asp-for="AppRole" class="form-control" />
+                    <span asp-validation-for="AppRole" class="text-danger"></span>
+                </div>
+                <div class="form-group float-right">
+                    <input type="submit" value="Log In" class="btn btn-primary" />
+                </div>
+            </form>
+        }
+        @if (User.IsInRole("Seller"))
+        {
+            <form asp-are="Seller" asp-action="LogIn">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AppRole" class="control-label"></label>
+                    <input asp-for="AppRole" class="form-control" />
+                    <span asp-validation-for="AppRole" class="text-danger"></span>
+                </div>
+                <div class="form-group float-right">
+                    <input type="submit" value="Log In" class="btn btn-primary" />
+                </div>
+            </form>
+        }
         <form asp-action="LogIn">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
