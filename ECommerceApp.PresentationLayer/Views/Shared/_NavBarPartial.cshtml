@@ -30,20 +30,7 @@
             <div class="navbar-nav ml-2">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    @if (User.IsInRole("User"))
-                    {
-                        <div class="nav-item">
-                            <form>
-                                <button type="submit" asp-controller="Home" asp-action="Index" class="btn btn-primary">@User.Identity.Name </button>
-                            </form>
-                        </div>
 
-                        <div class="nav-item">
-                            <form method="post" asp-controller="Account" asp-action="LogOut">
-                                <button type="submit" class="btn btn-primary">Log Out</button>
-                            </form>
-                        </div>
-                    }
                     @if (User.IsInRole("Admin"))
                     {
                         <div class="nav-item">
@@ -58,19 +45,35 @@
                             </form>
                         </div>
                     }
-                    @if (User.IsInRole("Seller"))
+                    else if (User.IsInRole("Seller"))
                     {
                         <div class="nav-item">
                             <form asp-area="Seller" asp-controller="Home" asp-action="Index" asp-route-username="@User.Identity.Name">
                                 <button type="submit" class="btn btn-primary">@User.Identity.Name</button>
                             </form>
                         </div>
+                        <pre></pre>
                         <div class="nav-item">
-                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                            <form method="post" asp-are="" asp-controller="Account" asp-action="LogOut">
                                 <button type="submit" class="btn btn-primary">Log Out</button>
                             </form>
                         </div>
                     }
+                    else
+                    {
+                        <div class="nav-item">
+                            <form>
+                                <button type="submit" asp-controller="Home" asp-action="Index" class="btn btn-primary">@User.Identity.Name </button>
+                            </form>
+                        </div>
+
+                        <div class="nav-item">
+                            <form method="post" asp-are="" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit" class="btn btn-primary">Log Out</button>
+                            </form>
+                        </div>
+                    }
+
                 }
                 else
                 {

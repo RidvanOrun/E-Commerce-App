@@ -12,7 +12,11 @@
                 <p class="card-text">@Model.DescText</p>
                 <p class="card-text">@Model.UnitPrice.ToString("C2")</p>
             </div>
-            @if (User.IsInRole("User"))
+            @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+            {
+                
+            }
+            else
             {
                 <div class="card-footer">
                     <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@Model.Id">Add To Cart</a>

@@ -50,21 +50,26 @@ namespace ECommerceApp.PresentationLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO model)
         {
-            if (ModelState.IsValid)
+            if (model!=null)
             {
-                var userId = await _appUser.GetUserIdFromName(model.UserName);
-                var user = await _appUser.GetLoginById(userId);
-                
-                
-                var result = await _appUser.LogIn(model);
-               
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction(nameof(HomeController.Index), "Home"); // Eğer giriş başarılı olursa HomeController'daki Home Index'a yönlendir.
+                    var userId = await _appUser.GetUserIdFromName(model.UserName);
+                    var user = await _appUser.GetLoginById(userId);
+
+
+                    var result = await _appUser.LogIn(model);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(HomeController.Index), "Home"); // Eğer giriş başarılı olursa HomeController'daki Home Index'a yönlendir.
+                    }
+                    ModelState.AddModelError(String.Empty, "Geçersiz giriş denemesi..!");
                 }
-                ModelState.AddModelError(String.Empty, "Geçersiz giriş denemesi..!");
+                return View();
             }
             return View();
+           
         }
         #endregion
 
