@@ -695,7 +695,7 @@
 						builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 					}
 				}
-5. "ECommerceApp.PresentationLayer" ismiyle Class Library (.Core) projesi eklenir.
+5. "ECommerceApp.PresentationLayer" ismiyle  ASP.NET Core Web App(Model-View-Controller) projesi eklenir.
 	
 	Yüklenecek Paketler :	-Autofac.Extensions.DependencyInjection(7.1.0)
 							-Microsoft.AspNetCore.Identity.EntityFrameworkCore(5.0.4)
@@ -707,3 +707,405 @@
 
 	Referans Proje		:	-"ECommerceApp.ApplicationLayer"
 							-"ECommerceApp.InfrastructureLayer"
+	
+	5.1. "Startup.cs" class ýnýn içerisi düzenlenir.
+		
+		public class Startup
+			{
+				public Startup(IConfiguration configuration)
+				{
+					Configuration = configuration;
+				}
+
+				public IConfiguration Configuration { get; }
+
+				// This method gets called by the runtime. Use this method to add services to the container.
+				public void ConfigureServices(IServiceCollection services)
+				{
+					services.AddControllersWithViews();
+
+					services.AddHttpClient(); //buna bak
+					services.AddMemoryCache(); //buda
+					services.AddSession(); //xx
+
+					services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+					services.AddAutoMapper(typeof(Mapping));
+
+					services.AddIdentity<AppUser, AppRole>(
+						x =>
+						{
+							x.SignIn.RequireConfirmedAccount = false;
+							x.SignIn.RequireConfirmedEmail = false;
+							x.SignIn.RequireConfirmedPhoneNumber = false;
+							x.User.RequireUniqueEmail = false;
+							x.Password.RequiredLength = 3; // => password e girilen karakterin minimum 3 olmasýný saðladýk. Varsayýlan deðer 6 dýr.
+							x.Password.RequiredUniqueChars = 0;
+							x.Password.RequireLowercase = false; // =>özelliði; þifre içerisinde en az 1 adet küçük harf zorunluluðu olmasý özelliðini false yaptýk.
+							x.Password.RequireUppercase = false; // => özelliði; þifre içerisinde en az 1 adet büyük harf zorunluluðu olmasýný false yaptýk.
+							x.Password.RequireNonAlphanumeric = false; // =>  özelliði; þifre içerisinde en az 1 adet alfanümerik karakter zorunluluðu olmasý özelliði false.
+						})
+						.AddEntityFrameworkStores<ApplicationDbContext>() // => AddEntityFrameworkStores<ApplicationDbContext>() metodu da; dahil ettiðimiz Identity ara katmanýndaki kullanýcý bilgilerini yönetirken hangi DbContext sýnýfýnýn kullanýlmasý gerektiðini belirtmektedir
+						.AddDefaultTokenProviders();
+					services.AddScoped<AppRole>();
+				}
+
+				// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+				public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+				{
+					if (env.IsDevelopment())
+					{
+						app.UseDeveloperExceptionPage();
+					}
+					else
+					{
+						app.UseExceptionHandler("/Home/Error");
+					}
+					app.UseStaticFiles();
+					app.UseSession();
+
+					app.UseRouting();
+
+					app.UseAuthentication(); //  metodu; web uygulamamýzýn, eklediðimiz Identity ara katmanýný yetkilendirme için kullanmasýný saðlamaktadýr.
+
+
+					app.UseAuthorization();
+
+
+					app.UseEndpoints(endpoints =>
+					{
+						endpoints.MapControllerRoute(
+						  name: "areas",
+						  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+					  );
+						endpoints.MapControllerRoute(
+							name: "default",
+							pattern: "{controller=Home}/{action=Index}/{id?}");
+					});
+				}
+			}
+
+	5.2 "appsetting.json" içerisine Db için gerekli iþlem yazýlýr.
+		
+		 "AllowedHosts": "*",
+		  "ConnectionStrings": {
+			"DefaultConnection": "Server=RIDVANORUN;Database=ECommerceApp;Trusted_Connection=True;MultipleActiveResultSets=True;"    
+			  
+		  }
+
+	5.3. "Program.cs" içerisine third part ýoc container için gerkli iþlem yazýlýr.
+		
+		public class Program
+			{
+				public static void Main(string[] args)
+				{
+					CreateHostBuilder(args).Build().Run();
+				}
+
+				public static IHostBuilder CreateHostBuilder(string[] args) =>
+				   Host.CreateDefaultBuilder(args)
+				   .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+				   .ConfigureContainer<ContainerBuilder>(builder =>
+				   {
+					   builder.RegisterModule(new AutoFactContainer());
+				   })
+					   .ConfigureWebHostDefaults(webBuilder =>
+					   {
+						   webBuilder.UseStartup<Startup>();
+					   });
+			}
+
+	5.4. "Migration" iþlemi yapýlýr. Database Güncellenir.
+
+	5.5. Controllers Folderý içerise Controllerlar eklenir ve içleri düzenlenir.
+		5.5.1. AccountController.cs 
+
+			public class AccountController : Controller
+				{
+					private readonly IAppUserService _appUser;
+
+					public AccountController(IAppUserService appUser)
+					{
+						_appUser = appUser;
+					}
+					#region Register
+					public IActionResult Register()
+					{
+						if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Home");
+						return View();
+					}
+
+					[HttpPost]
+					public async Task<IActionResult> Register(RegisterDTO model)
+					{
+						if (ModelState.IsValid)
+						{
+							var result = await _appUser.Register(model);
+							if (result.Succeeded)
+								return RedirectToAction("Index", "Home");
+							foreach (var item in result.Errors) ModelState.AddModelError(string.Empty, item.Description);
+						}
+						return View(model);
+					}
+					#endregion
+
+					#region LogIn
+					public IActionResult Login()
+					{
+						return View();
+					}
+
+					[HttpPost]
+					public async Task<IActionResult> Login(LoginDTO model)
+					{
+						if (model!=null)
+						{
+							if (ModelState.IsValid)
+							{
+								var userId = await _appUser.GetUserIdFromName(model.UserName);
+								var user = await _appUser.GetLoginById(userId);
+
+
+								var result = await _appUser.LogIn(model);
+
+								if (result.Succeeded)
+								{
+									return RedirectToAction(nameof(HomeController.Index), "Home"); // Eðer giriþ baþarýlý olursa HomeController'daki Home Index'a yönlendir.
+								}
+								ModelState.AddModelError(String.Empty, "Geçersiz giriþ denemesi..!");
+							}
+							return View();
+						}
+						return View();
+           
+					}
+					#endregion
+
+					#region LogOut
+					[HttpPost]
+					public async Task<IActionResult> LogOut()
+					{
+						await _appUser.LogOut();
+
+						return RedirectToAction(nameof(HomeController.Index), "Home");
+					}
+					#endregion
+
+					public async Task<IActionResult> EditProfile(string userName)
+					{
+						if (userName == User.Identity.Name)
+						{
+							var user = await _appUser.GetById(User.GetUserId());
+
+							if (user == null) return NotFound();
+
+							return View(user);
+						}
+						else
+						return RedirectToAction(nameof(HomeController.Index), "Home");
+					}
+
+					[HttpPost]
+					public async Task<IActionResult> EditProfile(EditProfileDTO model)
+					{
+						await _appUser.EditUser(model);
+						return RedirectToAction(nameof(HomeController.Index), "Home");
+					}
+
+					public async Task<IActionResult> Details (ProfileDTO model)
+					{            
+						var user = await _appUser.GetByUserName(model.UserName);
+						return View(user);
+					}
+				}
+				
+		5.5.2. CartController.cs 
+
+			public class CartController : Controller
+				{
+					private readonly ApplicationDbContext _applicationDbContext;
+
+					public CartController(ApplicationDbContext applicationDbContext) => _applicationDbContext = applicationDbContext;
+
+					public IActionResult Index()
+					{
+
+						List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+						CartViewModel cartViewModel = new CartViewModel
+						{
+							CartItems = cart,
+							GrandTotal = cart.Sum(x => x.Price * x.Quantity)
+						};
+
+						return View(cartViewModel);
+					}
+
+					public async Task<IActionResult> Add(int id)
+					{
+						Product product = await _applicationDbContext.Products.FindAsync(id);
+
+						List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();//çart bilgilerini session'da tutma karararý almýþtýk. Mantýksýz bir hareket deðildir. Çoðu e-ticaret sitesi bu yaklaþýmý kullanmaktadýr (günümüz için check edin). Bunun için uygulam içerisinde bulunan varlýklarý "json" dönüþtürmmemiz gerekmekteydi bunun için extension method yazdýk. burada bu eztension methodun Deserialize Object kýsmýný kullandýk. Neden? Çünkü Session üzerinden alýyorum cart'ýn bilgilerini. 
+
+						CartItem cartItem = cart.Where(x => x.ProductId == id).FirstOrDefault();
+
+						if (cartItem == null)
+						{
+							cart.Add(new CartItem(product));
+							 // sepete eklenmek istenilen ürün yok ise yani ürün sepete ilk kez eklenecekse
+						}
+						else
+						{
+							cartItem.Quantity += 1;//sepette var ise increase ediyoruz
+                
+						}
+
+						HttpContext.Session.SetJson("Cart", cart);
+
+						if (HttpContext.Request.Headers["X-Request-With"] != "XMLHttpRequest")
+						{
+							return RedirectToAction("Index", "Product");//"actionName, controllerName"
+						}
+
+						return RedirectToAction("Index"/*, "Product"*/);
+					}
+
+					public IActionResult Decrease(int id)
+					{
+						List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+						CartItem cartItem = cart.Where(x => x.ProductId == id).FirstOrDefault();
+
+						if (cartItem.Quantity > 1)
+							--cartItem.Quantity;
+						else
+							cart.RemoveAll(x => x.ProductId == id);
+
+
+						if (cart.Count == 0)
+							HttpContext.Session.Remove("Cart");
+						else
+							HttpContext.Session.SetJson("Cart", cart);
+
+
+						return RedirectToAction("Index");
+					}
+
+					public IActionResult Remove(int id)
+					{
+						List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart");
+
+						cart.RemoveAll(x => x.ProductId == id);
+
+						if (cart.Count == 0)
+							HttpContext.Session.Remove("Cart");
+						else
+							HttpContext.Session.SetJson("Cart", cart);
+
+						return RedirectToAction("Index");
+					}
+
+
+					public IActionResult Clear()
+					{
+						HttpContext.Session.Remove("Cart");
+						return RedirectToAction("Index", "Product");//"actionName, controllerName"
+					}
+
+					public IActionResult Payment()
+					{
+						HttpContext.Session.Clear();
+						return RedirectToAction("Index","Product");//"actionName, controllerName"
+					}
+
+					public IActionResult PaymentView()
+					{
+						HttpContext.Session.Clear();
+						return View();
+					}
+				}
+
+		5.5.3. HomeController.cs 	
+
+			public class HomeController : Controller
+				{
+					private readonly ILogger<HomeController> _logger;
+
+					public HomeController(ILogger<HomeController> logger)
+					{
+						_logger = logger;
+					}
+
+					public IActionResult Index()
+					{
+						return View();
+					}
+
+					public IActionResult Privacy()
+					{
+						return View();
+					}
+
+					[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+					public IActionResult Error()
+					{
+						return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+					}
+				}
+
+		5.5.4. ProductController.cs 
+
+			public class ProductController : Controller
+				{
+					private readonly IProductService _productService;
+					private readonly ICategoryService _categoryService;
+   
+					public ProductController(IProductService productService,
+											ICategoryService categoryService)
+					{
+						_productService = productService;
+						_categoryService = categoryService;
+					}
+
+					public async Task<IActionResult> Index(string search)
+					{
+						var model = await _productService.GetAll();
+						if (!string.IsNullOrEmpty(search))
+						{
+							model = model.Where(x => x.ProductName.Contains(search) || x.Description.Contains(search)).ToList();
+						}
+
+						return View(model);
+					}     
+
+					public IActionResult Details(int id)
+					{
+						ViewBag.productId = id;
+
+						return View();
+					}
+
+
+					public async Task<IActionResult> GetList(CategoryDTO categoryDTO)
+					{
+            
+						return View(await _productService.GetList(categoryDTO.Id));
+					}
+
+					public async Task<IActionResult> GetProductList(Category category)
+					{
+						List<Product> products = await _productService.GetList(category.Id);
+
+						return View(products);
+					}
+
+				}
+
+		5.5.5. Oluþturulan controller lar için gerekli viewlar oluþturtulur ve düzenlemeleri yapýlýr.
+
+	5.6. Areas folderi açýlýr ve içerisi düzenlenir.
+		5.6.1. Admin areasi Açýlýr.
+			5.6.1.1. Controllers folderý içerisine ihtiysç duyulan controllerlar eklenir ve düzenlenir. bununla birlikte viewlarý oluþturulur ve düzenlenir.
+		5.6.2. Seller Areasi açýlýr.
+			5.6.2.1. Controllers folderý içerisine ihtiysç duyulan controllerlar eklenir ve düzenlenir. bununla birlikte viewlarý oluþturulur ve düzenlenir
+			
