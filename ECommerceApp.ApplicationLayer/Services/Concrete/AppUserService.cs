@@ -29,7 +29,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             this._userManager = userManager;
         }
 
-        public async Task DeleteUser(int id) //=> Passive hale getireceğiz.
+        public async Task DeleteUser(int id)
         {
             AppUser user = await _unitOfWork.AppUserRepository.GetById(id);
 
@@ -41,10 +41,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
         {
             var user = await _unitOfWork.AppUserRepository.GetById(editProfileDTO.Id);
             if (user != null)
-
-            // İmage eklerken buna bak
-            // http://blog.alicancevik.com/net-core-mvc-resim-yukleme/
-
             {
                 if (editProfileDTO.Image != null)
                 {

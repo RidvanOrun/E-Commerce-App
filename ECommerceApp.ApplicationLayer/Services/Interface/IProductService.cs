@@ -11,7 +11,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
     {
         Task Create(ProductDTO productDTO);
         Task Update(ProductDTO productDTO);
-        Task Delete(ProductDTO productDTO);
 
         Task<ProductDTO> GetById(int id);      
 

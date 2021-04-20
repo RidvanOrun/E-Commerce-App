@@ -51,17 +51,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             }
         }
 
-        public async Task Delete(ProductDTO productDTO)
-        {
-            var product = await _unitOfWork.ProductRepository.FirstOrDefault(x => x.Id == productDTO.Id);
-
-            if (product != null)
-            {
-                _unitOfWork.ProductRepository.Delete(product);
-                await _unitOfWork.Commit();
-            }
-        }
-
         public async Task<List<Product>> GetAll()
         {
             List<Product> products = await _unitOfWork.ProductRepository.Get(x => x.Status != Status.Passive);

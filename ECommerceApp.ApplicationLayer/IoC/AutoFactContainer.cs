@@ -16,8 +16,6 @@ namespace ECommerceApp.ApplicationLayer.IoC
             builder.RegisterType<ProductService>().As<IProductService>().InstancePerLifetimeScope();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-
         }
     }
 }
