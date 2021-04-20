@@ -1,6 +1,6 @@
 # E-Commerce-App
 
-Bu projemi "Domain-Driven-Design/DDD" temel alarak yaptım. Projem ile ilgili açıklamalarıma projemin [*ReadMe.txt*](https://github.com/RidvanOrun/E-Commerce-App/blob/master/ReadMe.txt)'sinden ulaşabilirisiniz. Ayrıca projemde temel olarak aldığım ve kullandığım teknolojiler ile ilgili yaptığım dökümantasyonlarıma aşağıdaki kısımda inceleyebilirsiniz.
+Projemi "Domain-Driven-Design/DDD" temel alarak yaptım. Proje ile ilgili açıklamalarıma projemin [*ReadMe.txt*](https://github.com/RidvanOrun/E-Commerce-App/blob/master/ReadMe.txt)'sinden ulaşabilirisiniz. Ayrıca projemde temel olarak aldığım ve kullandığım teknolojiler ile ilgili yaptığım dökümantasyonlarımı aşağıdaki kısımda inceleyebilirsiniz.
 
 ## Kullandığım teknolojiler;
 
