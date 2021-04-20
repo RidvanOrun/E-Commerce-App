@@ -14,9 +14,6 @@ namespace ECommerceApp.DomainLayer.UnitOfWork
 
         IProductRepository ProductRepository { get; }
 
-       
-
-
         Task Commit(); //Başarılı bir işlemin sonucunda çalıştırılır. İşlemin başlamasından itibaren tüm değişikliklerin veri tabanına uygulanmasını temin eder.
 
         Task ExecuteSqlRaw(string sql, params object[] parameters); // Mevcut sql sorgularımızı doğrudan veri tabanında yürütmek için kullanılan bir method.

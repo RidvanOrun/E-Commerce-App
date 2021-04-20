@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.DomainLayer", "ECommerceApp.DomainLayer\ECommerceApp.DomainLayer.csproj", "{FF24818A-9EFF-448B-BD11-31B64F572F4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.DomainLayer", "ECommerceApp.DomainLayer\ECommerceApp.DomainLayer.csproj", "{FF24818A-9EFF-448B-BD11-31B64F572F4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.InfrastructureLayer", "ECommerceApp.InfrastructureLayer\ECommerceApp.InfrastructureLayer.csproj", "{10A7419B-533C-4102-AC81-AD4EB75B2C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.InfrastructureLayer", "ECommerceApp.InfrastructureLayer\ECommerceApp.InfrastructureLayer.csproj", "{10A7419B-533C-4102-AC81-AD4EB75B2C05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.ApplicationLayer", "ECommerceApp.ApplicationLayer\ECommerceApp.ApplicationLayer.csproj", "{071CBF62-CCE2-4814-A0E6-A25D325CC1B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.ApplicationLayer", "ECommerceApp.ApplicationLayer\ECommerceApp.ApplicationLayer.csproj", "{071CBF62-CCE2-4814-A0E6-A25D325CC1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApp.PresentationLayer", "ECommerceApp.PresentationLayer\ECommerceApp.PresentationLayer.csproj", "{E3FC10E5-BF8A-415A-8B86-864117DCAC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApp.PresentationLayer", "ECommerceApp.PresentationLayer\ECommerceApp.PresentationLayer.csproj", "{E3FC10E5-BF8A-415A-8B86-864117DCAC2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documantation", "Documantation", "{EEEEF0A7-2E27-4F36-9022-43E14D1DFD9A}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.txt = ReadMe.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
