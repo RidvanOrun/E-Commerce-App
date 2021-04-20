@@ -8,7 +8,7 @@ Domain-Driven Design=> [*RidvanOrun/GitBook/DDD*](https://ridvanorun.gitbook.io/
 
 Entity Framework =>  [*RidvanOrun/GitBook/EF*](https://ridvanorun.gitbook.io/entity-framework/) 
 
-SOLID Prensipleri =>  [*RidvanOrun/GitBook/SOLID*](https://ridvanorun.gitbook.io/https://ridvanorun.gitbook.io/solid//) 
+SOLID Prencibles =>  [*RidvanOrun/GitBook/SOLID*](https://ridvanorun.gitbook.io/https://ridvanorun.gitbook.io/solid//) 
 
 Asp.NetCore, Asynchronous Programming, View Component => [*RidvanOrun/GitBook/.NetCore*](https://ridvanorun.gitbook.io/asp-net-core/)
 
