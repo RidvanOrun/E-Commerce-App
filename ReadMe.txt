@@ -1,5 +1,4 @@
 
-
 1. "ECommerceApp" ismiyle Blank Solution açýlýr.
 2. "ECommerceApp.DomainLayer" ismiyle Class Library (.Core) projesi eklenir.
 	2.1. "Enums" dosyasý açýlýr.
@@ -73,4 +72,4 @@
 				}
 
 
-
+				  
