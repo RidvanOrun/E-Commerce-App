@@ -2,7 +2,7 @@
 
 Bu projemi "Domain-Driven-Design/DDD" temel alınarak yaptım. Projem ile ilgili açıklamalarımı projemin [*ReadMe.txt*](https://github.com/RidvanOrun/E-Commerce-App/blob/master/ReadMe.txt)'sinden ulaşabilirisiniz. Ayrıca projemde temel olarak aldığım ve kullandığım teknolojiler ile ilgili yaptığım dökümantasyonlarıma aşağıdaki kısımda inceleyebilirsiniz.
 
-## Projede kullanılan teknolojiler;
+## Kullandığım teknolojiler;
 
 Domain-Driven Design=> [*RidvanOrun/GitBook/DDD*](https://ridvanorun.gitbook.io/ddd/) 
 
