@@ -63,29 +63,5 @@ namespace ECommerceApp.PresentationLayer.Controllers
             return View(products);
         }
 
-        //public async Task<IActionResult> Search(SProductGridDTO model)
-        //{
-        //    var builder = new ProductGridBuilder(HttpContext.Session, values, defaultSortFilter: nameof(Product.ProductName));
-
-        //    var options = new ProductQueryOptions
-        //    {
-        //        Includes = "AppUserToProducts.AppUser, Category",
-        //        OrderByDirection = builder.CurrentRotue.SortDirection,
-        //    };
-
-        //    options.SortFilter(builder);
-
-        //    var vm = new ProductFilterViewModel
-        //    {
-        //        Products = _productService.; data.Books.List(options),
-        //        AppUsers = data.Authors.List(new QueryOptions<AppUser> { OrderBy = a => a.FirstName }),
-        //        Categories = _productService.GetCategory();
-        //        CurrentRoute = builder.CurrentRotue,
-        //        TotalPage = builder.GetTotalPages(data.Books.Count)
-        //    };
-
-        //    return View(vm);
-        //}
-
     }
 }

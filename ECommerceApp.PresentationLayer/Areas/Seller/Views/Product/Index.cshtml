@@ -2,7 +2,7 @@
 @model IEnumerable<Product>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  
 }
 
 <div class="row">
@@ -19,7 +19,7 @@
                     <p class="card-text">@item.UnitPrice.ToString("C2")</p>
                 </div>
                 <div class="card-footer">
-                    <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@item.Id">Add To Cart</a>
+                    <a asp-area="" asp-controller="Product" asp-action="Details" class="btn btn-block btn-dark" asp-route-id="@item.Id">Detail</a>
                 </div>
             </div>
         </div>

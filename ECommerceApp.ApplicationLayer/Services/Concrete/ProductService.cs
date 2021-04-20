@@ -73,14 +73,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             var product = await _unitOfWork.ProductRepository.GetById(id);
 
             return _mapper.Map<ProductDTO>(product);
-        }
-
-        public async Task<ProductDTO> GetByName(string productName)
-        {
-            var product = await _unitOfWork.ProductRepository.GetByUserName(productName);
-
-            return _mapper.Map<ProductDTO>(product);
-        }
+        }     
 
         public async Task<List<Product>> GetList(int id)
         {
@@ -89,12 +82,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
             List<Product> products = await _unitOfWork.ProductRepository.Get(x => x.CategoryId == category.Id);
 
             return products;
-        }
-        //public async Task<List<Product>> ProductByCategory(CategoryDTO categoryDTO)
-        //{
-        //    List<Product> products = await _unitOfWork.CategoryRepository.Get(x => x.CategoryName == categoryDTO.CategoryName);
-        //    return products;
-        //}
+        }      
 
         public async Task<List<Product>> GetOrderByList()
         {
@@ -122,8 +110,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
         public async Task Update(ProductDTO productDTO)
         {
             var products = await _unitOfWork.ProductRepository.FirstOrDefault(x => x.Id == productDTO.Id);
-            //if (products!= null)
-            //{
+        
             if (productDTO != null)
             {
                 if (productDTO.Image != null)
@@ -154,18 +141,8 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                 await _unitOfWork.Commit();
 
             }
-            //}
+            
         }
-
-        public Task<List<Product>> GetProductsFromSeller()
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async Task<List<Product>> GetProductsFromSeller(int product)
-        //{
-        //    var productListFromSeller = await _unitOfWork.ProductRepository.Get(x => x.AppUserToProducts.AsEnumerable<Pro);
-        //    return productListFromSeller;
-        //}
+     
     }
 }

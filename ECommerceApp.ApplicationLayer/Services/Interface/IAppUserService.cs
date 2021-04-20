@@ -16,7 +16,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
         Task<SignInResult> LogIn(LoginDTO loginDTO);
         Task LogOut();
 
-        Task<int> GetUserIdFromName(string userName); // => Kullanıcının isminden Id yakalamak için kullanılır.
+        Task<int> GetUserIdFromName(string userName);
 
         Task<EditProfileDTO> GetById(int id);
         Task<LoginDTO> GetLoginById(int id);

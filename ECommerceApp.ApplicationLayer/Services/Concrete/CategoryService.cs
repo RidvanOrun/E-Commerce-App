@@ -68,25 +68,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
 
         }
 
-        public Task<Category> GetActiveToCategory(int id)
-        {
-            //var category = await _unitOfWork.CategoryRepository.GetById(id);
-
-            //if (category != null)
-            //{
-            //    category.Status = Status.Modified;
-            //    await _unitOfWork.Commit();
-            //}
-            //return category; -----------------> ihtiyaç olursa açıcam...
-
-            throw new NotImplementedException();
-
-        }
-
-        public Task<List<Category>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<CategoryDTO> GetById(int id)
         {
@@ -105,13 +86,6 @@ namespace ECommerceApp.ApplicationLayer.Services.Concrete
                expression: x => Convert.ToInt32(x.Id) == categoryDTO.Id
                );
             return category;
-        }
-
-        public async Task<List<Category>> GetToPassive()
-        {
-            List<Category> categories = await _unitOfWork.CategoryRepository.Get(x => x.Status != Status.Passive);
-
-            return categories;
         }
 
         public async Task Update(CategoryDTO categoryDTO)

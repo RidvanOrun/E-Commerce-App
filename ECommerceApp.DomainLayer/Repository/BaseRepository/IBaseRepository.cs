@@ -11,19 +11,13 @@ namespace ECommerceApp.DomainLayer.Repository.BaseRepository
 {
     // Repository: Temel olarak veritabanı sorgulama işlemlerinin bir merkezden yapılmasını sağlayarak iş katmamına bu işlererin taşınmasını önler bu şekilde sorgu ve kod tekrarını engelleriz
     public interface IBaseRepository<T> where T: IBaseEntity
-    {
-        Task<List<T>> GettAll();
+    {       
         Task<List<T>> Get(Expression<Func<T, bool>> expression);
-        Task<T> GetById(int id);
-        Task<T> GetByUserName(string userName);
-      
+        Task<T> GetById(int id);      
         Task<T> FirstOrDefault(Expression<Func<T, bool>> expression);
-        Task<bool> Any(Expression<Func<T, bool>> expression);
-
         Task Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-
 
         Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector,
                                                          Expression<Func<T, bool>> expression = null,

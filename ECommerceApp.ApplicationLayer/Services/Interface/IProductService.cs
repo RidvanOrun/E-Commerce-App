@@ -13,21 +13,16 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
         Task Update(ProductDTO productDTO);
         Task Delete(ProductDTO productDTO);
 
-        Task<ProductDTO> GetById(int id);
-        Task<ProductDTO> GetByName(string productName);
+        Task<ProductDTO> GetById(int id);      
 
         Task<List<Product>> GetAll();
-
-        Task<List<Product>> GetProductsFromSeller();
-
+     
         Task<List<Product>> GetOrderByList();
 
         Task<List<Category>> GetCategory(); 
-        
-        //????????????? List AppuserToProduct Aynısından appuserdada olması gerekiyor mu aceeebaaaa
+       
         Task<List<Product>> GetList(int id);
 
-        //Task<List<Product>> ProductByCategory(CategoryDTO categoryDTO);
 
     }
 }

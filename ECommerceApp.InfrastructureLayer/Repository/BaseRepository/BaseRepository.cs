@@ -23,9 +23,7 @@ namespace ECommerceApp.InfrastructureLayer.Repository.BaseRepository
             this._context = context; // => dışarıdan gelen context bağlantısını _context ile eşitledik.
             this._table = _context.Set<T>(); // Tablolarımızı her defasında yazmamak için bu consructor method ile _context ile tanımlandı.
         }
-        public async Task Add(T entity) => await _table.AddAsync(entity);// => Gelen Entity AddAsync methoduyla ekledik.
-
-        public async Task<bool> Any(Expression<Func<T, bool>> expression) => await _table.AnyAsync(expression); // => geri dönüş tipi bool olarak belirledik ve yazılan expression a göre True False dönecek
+        public async Task Add(T entity) => await _table.AddAsync(entity);// => Gelen Entity AddAsync methoduyla ekledik.     
 
         public void Delete(T entity)
         {
@@ -36,9 +34,7 @@ namespace ECommerceApp.InfrastructureLayer.Repository.BaseRepository
         public async Task<T> FirstOrDefault(Expression<Func<T, bool>> expression) => await _table.Where(expression).FirstOrDefaultAsync();
 
         public async Task<List<T>> Get(Expression<Func<T, bool>> expression) => await _table.Where(expression).ToListAsync();
-        public async Task<T> GetById(int id) => await _table.FindAsync(id);
-        public async Task<List<T>> GettAll() => await _table.ToListAsync();
-        public async Task<T> GetByUserName(string userName) => await _table.FindAsync(userName);
+        public async Task<T> GetById(int id) => await _table.FindAsync(id);      
 
         public void Update(T entity)
         {

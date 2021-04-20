@@ -1,5 +1,6 @@
 ﻿@model ProductDTO
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
 <div class="row">
     <div class="col-4">
         <div class="card">
@@ -12,15 +13,19 @@
                 <p class="card-text">@Model.DescText</p>
                 <p class="card-text">@Model.UnitPrice.ToString("C2")</p>
             </div>
-            @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+
+            @if (SignInManager.IsSignedIn(User))
             {
-                
-            }
-            else
-            {
-                <div class="card-footer">
-                    <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@Model.Id">Add To Cart</a>
-                </div>
+                @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+                {
+
+                }
+                else
+                {
+                    <div class="card-footer">
+                        <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@Model.Id">Add To Cart</a>
+                    </div>
+                }
             }
         </div>
     </div>

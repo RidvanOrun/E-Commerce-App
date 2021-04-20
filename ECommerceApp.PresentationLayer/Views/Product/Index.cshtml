@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
 
 
 
@@ -18,15 +20,31 @@
                     <p class="card-title">@item.ProductName</p>
                     <p class="card-text">@item.Description</p>
                     <p class="card-text">@item.UnitPrice.ToString("C2")</p>
-                    @*<p class="card-text">@item.Category.CategoryName</p>*@
                 </div>
                 <div class="card-footer">
                     <a asp-controller="Product" asp-action="Details" class="btn btn-block btn-dark" asp-route-id="@item.Id">Detail</a>
                 </div>
-                <div class="card-footer">
-                    <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@item.Id">Add To Cart</a>
-                </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+                    {
+
+                    }
+                    else
+                    {
+                        <div class="card-footer">
+                            <a asp-controller="Cart" asp-action="Add" class="btn btn-block btn-dark" asp-route-id="@item.Id">Add To Cart</a>
+                        </div>
+                    }
+                }
+                else
+                {
+
+                }
+
+
+
             </div>
         </div>
-        }
+    }
 </div>

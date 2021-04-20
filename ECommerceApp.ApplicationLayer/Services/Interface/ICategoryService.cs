@@ -15,11 +15,7 @@ namespace ECommerceApp.ApplicationLayer.Services.Interface
 
         Task<CategoryDTO> GetById(int id);
         Task<CategoryDTO> GetCategoryName(CategoryDTO categoryDTO);
-        Task<Category> GetActiveToCategory(int id);  // => Pasif olan Category'leri Aktif Etmek için kullanıyoruz.
-
-
-        Task<List<Category>> GetToPassive(); // => Pasif olan Category'leri Listelemek için kullanıyoruz.
-        Task<List<Category>> GetAll();
+      
         Task<List<Category>> CategoryList();
     }
 }

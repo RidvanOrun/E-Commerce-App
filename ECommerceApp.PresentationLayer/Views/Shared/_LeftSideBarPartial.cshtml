@@ -6,10 +6,10 @@
 {
     <ul class="list-group">
         <li class="list-group-item">
-            <a asp-area="" asp-controller="Product" asp-action="Index"> Site Home Page</a>
+            <a asp-area="Admin" asp-controller="Product" asp-action="Index"> All Products</a>
         </li>
         <li class="list-group-item">
-            <a asp-area="Admin" asp-controller="Product" asp-action="List">Products</a>
+            <a asp-area="Admin" asp-controller="Product" asp-action="List">Product List</a>
         </li>
         <li class="list-group-item">
             <a asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
@@ -27,26 +27,23 @@
 }
 else if (User.IsInRole("Seller"))
 {
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a asp-area="Seller" asp-controller="Product" asp-action="Index">My Products </a>
-        </li>
-        <li class="list-group-item">
-            <a asp-area="Seller" asp-controller="Product" asp-action="List">Product List</a>
-        </li>
-
-        <li class="list-group-item">
-            <a asp-area="Seller" asp-controller="Product" asp-action="Create">Create Product </a>
-        </li>
-
-        <li class="list-group-item">
-            <a asp-area="Seller" asp-controller="Product" asp-action="Index">All Products</a>
-        </li>
-
-        <li class="list-group-item">
-            <a asp-area=" " asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name">@User.Identity.Name Profile</a>
-        </li>
-    </ul>
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-area="Seller" asp-controller="Product" asp-action="Index">All Products</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-area="Seller" asp-controller="Product" asp-action="List">Product List</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-area="Seller" asp-controller="Product" asp-action="Index">My Products </a>
+    </li>
+    <li class="list-group-item">
+        <a asp-area="Seller" asp-controller="Product" asp-action="Create">Create Product </a>
+    </li>
+    <li class="list-group-item">
+        <a asp-area=" " asp-controller="Account" asp-action="Details" asp-route-username="@User.Identity.Name">@User.Identity.Name Profile</a>
+    </li>
+</ul>
 }
 
 else
